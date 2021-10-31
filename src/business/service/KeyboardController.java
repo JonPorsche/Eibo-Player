@@ -1,3 +1,6 @@
+package business.service;
+
+import de.hsrm.mi.prog.util.StaticScanner;
 
 public class KeyboardController {
 

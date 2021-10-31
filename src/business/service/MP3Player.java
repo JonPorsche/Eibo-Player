@@ -1,3 +1,5 @@
+package business.service;
+
 import ddf.minim.AudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
@@ -8,7 +10,7 @@ public class MP3Player {
     private static SimpleAudioPlayer audioPlayer;
 
     public void play() {
-        audioPlayer = minim.loadMP3File("sounds/02 Drei Worte.mp3");
+        audioPlayer = minim.loadMP3File("music/02 Drei Worte.mp3");
         audioPlayer.play();
     }
 
