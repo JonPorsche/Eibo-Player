@@ -10,7 +10,7 @@ public class MP3Player {
     private static SimpleAudioPlayer audioPlayer;
 
     public void play() {
-        audioPlayer = minim.loadMP3File("music/02 Drei Worte.mp3");
+        audioPlayer = minim.loadMP3File("music/02_Drei_Worte.mp3");
         audioPlayer.play();
     }
 

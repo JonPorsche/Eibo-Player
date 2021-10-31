@@ -15,4 +15,8 @@ public class Playlist {
         this.creationDate = creationDate;
         this.coverFile = coverFile;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
