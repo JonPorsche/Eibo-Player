@@ -9,8 +9,8 @@ public class MP3Player {
     private SimpleMinim minim = new SimpleMinim();
     private static SimpleAudioPlayer audioPlayer;
 
-    public void play() {
-        audioPlayer = minim.loadMP3File("music/02_Drei_Worte.mp3");
+    public void play(String title) {
+        audioPlayer = minim.loadMP3File("music/" + title + ".mp3");
         audioPlayer.play();
     }
 

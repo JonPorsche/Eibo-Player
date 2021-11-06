@@ -10,10 +10,13 @@ public class KeyboardController {
     private PlaylistManager playlistManager = new PlaylistManager();
 
     public void start(){
-        String test = StaticScanner.nextString();
-        switch (test){
+        String input = StaticScanner.nextString();
+        String parts[] = input.split(" ", 2);
+        // System.out.println(String.format("cr: %s, cdr: %s", parts[0], parts[1]));
+
+        switch (parts[0]){
             case PLAY:
-                mp3Player.play();
+                mp3Player.play(parts[1]);
                 break;
             case PAUSE:
                 mp3Player.pause();
