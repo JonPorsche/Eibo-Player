@@ -16,7 +16,7 @@ public class KeyboardController{
     }
 
     public void start() {
-        String input = StaticScanner.nextString();
+        String input = scanner.nextString();
         String[] commands = input.split(" ", 2);
 
         switch (commands.length) {
