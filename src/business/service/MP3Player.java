@@ -11,11 +11,32 @@ public class MP3Player {
 
     public void play(String title) {
         audioPlayer = minim.loadMP3File("music/" + title + ".mp3");
-        audioPlayer.play();
+        new Thread(){
+            @Override
+            public void run() {
+                audioPlayer.play();
+            }
+        }.start();
+    }
+
+    public void play(){
+        audioPlayer = minim.loadMP3File("music/01 Bring Mich Nach Hause.mp3");
+        new Thread(){
+            @Override
+            public void run() {
+                audioPlayer.play();
+            }
+        }.start();
     }
 
     public void pause() {
         audioPlayer.pause();
+    }
+
+    public void volume(String gain){
+        float newGain = Float.parseFloat(gain);
+        System.out.println(newGain);
+        audioPlayer.setGain(newGain);
     }
 }
 
