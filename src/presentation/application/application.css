@@ -1,0 +1,63 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.bkg{
+	-fx-background-color: #121212;
+}
+
+.border-to-test{
+	-fx-border-size: 1px;
+	-fx-border-color: dodgerblue;
+	-fx-border-style: solid;
+}
+
+#header{
+	-fx-padding: 5px;
+}
+
+.text-color{
+	-fx-text-fill: white;
+}
+
+.main-text {
+	-fx-text-align: center;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 22;
+	-fx-padding: 3px, 10px;
+}
+
+.second-text {
+	-fx-alignment: center;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14;
+	-fx-padding: 3px, 10px;
+}
+
+#controller{
+	-fx-alignment: center;
+	-fx-padding: 10px;
+}
+
+.control-button {
+	-fx-min-height: 44;
+	-fx-min-width: 44;
+	-fx-background-radius: 22;
+	-fx-border-radius: 22;
+	-fx-background-position: center;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat no-repeat;
+	-fx-border-size: 1px;
+	-fx-border-color: #707070;
+	-fx-border-style: solid;
+	-fx-background-size: 30%;
+	-fx-opacity: 0.6;
+}
+
+.control-button:hover {
+	-fx-border-color:dodgerblue;
+	-fx-opacity: 1;
+}
+
+#play{
+	-fx-background-image: url("../assets/icons/png/play@3x.png");
+	-fx-background-position: 55%;
+}
