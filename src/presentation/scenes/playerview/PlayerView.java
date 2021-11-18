@@ -51,6 +51,9 @@ public class PlayerView extends BorderPane {
 
         // CONTROLS
         HBox controller = new HBox();
+
+        controller.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         controller.getStyleClass().add("bkg");
         controller.setId("controller");
 
