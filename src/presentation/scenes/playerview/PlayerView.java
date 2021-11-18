@@ -15,9 +15,10 @@ import java.io.FileNotFoundException;
 
 public class PlayerView extends BorderPane {
 
-    private Label titleLabel;
-    private Label artistLabel;
-    private ImageView coverView;
+    Label titleLabel;
+    Label artistLabel;
+    ImageView coverView;
+    Button playButton = new Button();
 
     public PlayerView() {
         VBox header = new VBox();
@@ -50,19 +51,18 @@ public class PlayerView extends BorderPane {
         this.setCenter(new ImageViewPane(coverView));
 
         // CONTROLS
-        HBox controller = new HBox();
+        HBox controlBox = new HBox();
 
-        controller.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        controlBox.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
-        controller.getStyleClass().add("bkg");
-        controller.setId("controller");
+        controlBox.getStyleClass().add("bkg");
+        controlBox.setId("controller");
 
-        Button playButton = new Button();
         playButton.getStyleClass().add("control-button");
         playButton.setId("play");
 
-        controller.getChildren().add(playButton);
+        controlBox.getChildren().add(playButton);
 
-        this.setBottom(controller);
+        this.setBottom(controlBox);
     }
 }

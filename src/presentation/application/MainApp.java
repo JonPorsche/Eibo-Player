@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerView;
+import presentation.scenes.playerview.PlayerViewController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,8 +42,11 @@ public class MainApp extends Application {
             scenes = new HashMap<String, Pane>();
 
             // Definition der Screens/Scenes
-            Pane view = new PlayerView();
-            scenes.put("PlayerView", view);
+            /*Pane view = new PlayerView();
+            scenes.put("PlayerView", view);*/
+
+            PlayerViewController playerViewController = new PlayerViewController();
+            scenes.put("PlayerView", playerViewController.getRootView());
 
             // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden
             Pane root = scenes.get("PlayerView");

@@ -20,7 +20,7 @@ public class MP3Player {
     }
 
     public void play(){
-        audioPlayer = minim.loadMP3File("music/01 Bring Mich Nach Hause.mp3");
+        audioPlayer = minim.loadMP3File("music/12 Fear Of The Dark.mp3");
         new Thread(){
             @Override
             public void run() {
