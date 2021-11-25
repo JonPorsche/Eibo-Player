@@ -1,6 +1,7 @@
 package presentation.application;
 
 import business.service.KeyboardController;
+import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 public class MainApp extends Application {
 
+    private MP3Player player;
     Map<String, Pane> scenes;
 
     public static void main(String[] args) {
@@ -45,7 +47,7 @@ public class MainApp extends Application {
             /*Pane view = new PlayerView();
             scenes.put("PlayerView", view);*/
 
-            PlayerViewController playerViewController = new PlayerViewController();
+            PlayerViewController playerViewController = new PlayerViewController(player);
             scenes.put("PlayerView", playerViewController.getRootView());
 
             // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden
@@ -67,5 +69,14 @@ public class MainApp extends Application {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void init() {
+
+        /* in der Anwednung gibt es einen Player, der dann von allen
+         * Seiten/Views bzw. deren Controllern aus erreichbar ist
+         */
+        player = new MP3Player();
     }
 }
