@@ -6,8 +6,9 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 public class MP3Player {
 
-    private SimpleMinim minim = new SimpleMinim();
+    private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
+    public boolean isPlaying;
 
     public void play(String title) {
         audioPlayer = minim.loadMP3File("music/" + title + ".mp3");
@@ -20,16 +21,20 @@ public class MP3Player {
     }
 
     public void play(){
+        minim = new SimpleMinim();
         audioPlayer = minim.loadMP3File("music/12 Fear Of The Dark.mp3");
         new Thread(){
             @Override
             public void run() {
+                isPlaying = true;
                 audioPlayer.play();
             }
         }.start();
+
     }
 
     public void pause() {
+        isPlaying = false;
         audioPlayer.pause();
     }
 

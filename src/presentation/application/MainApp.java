@@ -34,12 +34,14 @@ public class MainApp extends Application {
         // GUI
         new Thread(() -> launch(args)).start();
 
-        KeyboardController controller = new KeyboardController();
+        //KeyboardController controller = new KeyboardController();
     }
 
     /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
+        this.player = new MP3Player();
+
         try {
             scenes = new HashMap<String, Pane>();
 
@@ -71,12 +73,11 @@ public class MainApp extends Application {
         }
     }
 
-    @Override
+/*    @Override
     public void init() {
 
-        /* in der Anwednung gibt es einen Player, der dann von allen
+        *//* in der Anwednung gibt es einen Player, der dann von allen
          * Seiten/Views bzw. deren Controllern aus erreichbar ist
-         */
-        player = new MP3Player();
-    }
+         *//*
+    }*/
 }

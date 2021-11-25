@@ -16,23 +16,6 @@ public class PlayerViewController {
     Pane rootView;
     MP3Player player;
 
-    private class PlayEventHandler implements EventHandler<ActionEvent> {
-
-        boolean isPlaying;
-
-        @Override
-        public void handle(ActionEvent event) {
-            if (!isPlaying) {
-                isPlaying = true;
-                player.play();
-            } else {
-                isPlaying = false;
-                player.pause();
-            }
-        }
-
-    }
-
     public PlayerViewController(MP3Player player) {
 
         this.player = player;
@@ -50,12 +33,18 @@ public class PlayerViewController {
     }
 
     public void initialize(){
-        playButton.addEventHandler(ActionEvent.ACTION,
-                event -> player.play()
-        );
+        playButton.setOnAction(event -> startPlayer());
     }
 
     public Pane getRootView() {
         return rootView;
+    }
+
+    private void startPlayer(){
+        if (player.isPlaying) {
+            player.pause();
+        } else {
+            player.play();
+        }
     }
 }
