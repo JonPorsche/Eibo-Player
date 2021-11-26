@@ -42,8 +42,10 @@ public class PlayerViewController {
 
     private void startPlayer(){
         if (player.isPlaying) {
+            playButton.setId("play");
             player.pause();
         } else {
+            playButton.setId("pause");
             player.play();
         }
     }

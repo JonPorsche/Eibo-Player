@@ -15,7 +15,7 @@
     -fx-border-size: 1px;
     -fx-border-color: #707070;
     -fx-border-style: solid;
-    -fx-background-size: 30%;
+    -fx-background-size: 65%;
     -fx-opacity: 0.6;
 }
 
@@ -25,6 +25,11 @@
 }
 
 #play{
-    -fx-background-image: url("../../assets/icons/png/play@3x.png");
-    -fx-background-position: 55%;
+    -fx-background-image: url("../../assets/icons/png3x/play@3x.png");
+    -fx-background-position: 60%;
+}
+
+#pause{
+    -fx-background-image: url("../../assets/icons/png3x/pause@3x.png");
+    -fx-background-position: 50%;
 }
