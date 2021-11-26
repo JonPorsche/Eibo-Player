@@ -1,7 +1,7 @@
 
 #controller{
     -fx-alignment: center;
-    -fx-padding: 10px;
+    -fx-padding: 20px;
 }
 
 .control-button {
@@ -24,6 +24,16 @@
     -fx-opacity: 1;
 }
 
+#repeat{
+    -fx-background-image: url("../../assets/icons/png3x/repeat@3x.png");
+    -fx-background-position: 50%;
+}
+
+#skip-back{
+    -fx-background-image: url("../../assets/icons/png3x/skip_back@3x.png");
+    -fx-background-position: 50%;
+}
+
 #play{
     -fx-background-image: url("../../assets/icons/png3x/play@3x.png");
     -fx-background-position: 60%;
@@ -31,5 +41,15 @@
 
 #pause{
     -fx-background-image: url("../../assets/icons/png3x/pause@3x.png");
+    -fx-background-position: 50%;
+}
+
+#skip-next{
+    -fx-background-image: url("../../assets/icons/png3x/skip_next@3x.png");
+    -fx-background-position: 50%;
+}
+
+#shuffle{
+    -fx-background-image: url("../../assets/icons/png3x/shuffle@3x.png");
     -fx-background-position: 50%;
 }

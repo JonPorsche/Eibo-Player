@@ -18,7 +18,11 @@ public class PlayerView extends BorderPane {
     Label titleLabel;
     Label artistLabel;
     ImageView coverView;
+    Button repeatButton = new Button();
+    Button skipBackButton = new Button();
     Button playButton = new Button();
+    Button skipNextButton = new Button();
+    Button shuffleButton = new Button();
 
     public PlayerView() {
         VBox header = new VBox();
@@ -58,10 +62,26 @@ public class PlayerView extends BorderPane {
         controlBox.getStyleClass().add("bkg");
         controlBox.setId("controller");
 
+        repeatButton.getStyleClass().add("control-button");
+        repeatButton.setId("repeat");
+
+        skipBackButton.getStyleClass().add("control-button");
+        skipBackButton.setId("skip-back");
+
         playButton.getStyleClass().add("control-button");
         playButton.setId("play");
 
+        skipNextButton.getStyleClass().add("control-button");
+        skipNextButton.setId("skip-next");
+
+        shuffleButton.getStyleClass().add("control-button");
+        shuffleButton.setId("shuffle");
+
+        controlBox.getChildren().add(repeatButton);
+        controlBox.getChildren().add(skipBackButton);
         controlBox.getChildren().add(playButton);
+        controlBox.getChildren().add(skipNextButton);
+        controlBox.getChildren().add(shuffleButton);
 
         this.setBottom(controlBox);
     }
