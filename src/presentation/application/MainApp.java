@@ -1,13 +1,11 @@
 package presentation.application;
 
-import business.service.KeyboardController;
 import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.scenes.playerview.PlayerView;
 import presentation.scenes.playerview.PlayerViewController;
 
 import java.io.IOException;
@@ -58,10 +56,12 @@ public class MainApp extends Application {
             /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
             als aktuelle darzustellende Szene für die Bühne
          */
-            Scene scene = new Scene(root, 400, 450);
+            Scene scene = new Scene(root, 450, 570);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             primaryStage.setScene(scene);
+            /*primaryStage.minWidthProperty().bind(scene.heightProperty().multiply(2));
+            primaryStage.minHeightProperty().bind(scene.widthProperty().divide(2));*/
 
             /*  es muss explizit gesagt werden , dass das Fenster sichtbar
             gemacht werden soll

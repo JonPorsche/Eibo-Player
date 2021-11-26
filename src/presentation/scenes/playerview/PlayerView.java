@@ -26,6 +26,7 @@ public class PlayerView extends BorderPane {
 
     public PlayerView() {
         VBox header = new VBox();
+        this.getStyleClass().add("bkg");
 
         // HEADER
         header.getStyleClass().add("bkg");
@@ -45,6 +46,8 @@ public class PlayerView extends BorderPane {
 
         // COVER
         coverView = new ImageView();
+        coverView.setPreserveRatio(true);
+
         try {
             coverView.setImage(new Image(new FileInputStream("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/Iron Maiden - Fear Of The Dark.jpeg")));
         } catch (FileNotFoundException e) {
@@ -52,6 +55,7 @@ public class PlayerView extends BorderPane {
         }
 
         ImageViewPane pane = new ImageViewPane(coverView);
+
         this.setCenter(new ImageViewPane(coverView));
 
         // CONTROLS
