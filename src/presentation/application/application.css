@@ -10,19 +10,18 @@
 	-fx-border-style: solid;
 }
 
-#header{
-	-fx-padding: 5px;
+.border-to-test-gray{
+	-fx-border-size: 1px;
+	-fx-border-color: gray;
+	-fx-border-style: solid;
 }
 
 .text-color{
-	-fx-text-fill: white;
 }
 
-.main-text {
-	-fx-text-align: center;
+.main-text{
 	-fx-font-family: Helvetica;
-	-fx-font-size: 22;
-	-fx-padding: 3px, 10px;
+	-fx-text-fill: white;
 }
 
 .second-text {

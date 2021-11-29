@@ -56,7 +56,7 @@ public class MainApp extends Application {
             /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
             als aktuelle darzustellende Szene für die Bühne
          */
-            Scene scene = new Scene(root, 450, 570);
+            Scene scene = new Scene(root, 360, 640);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             primaryStage.setScene(scene);

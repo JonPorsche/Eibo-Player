@@ -1,55 +1,120 @@
-
-#controller{
-    -fx-alignment: center;
-    -fx-padding: 20px;
+#player-view{
+    -fx-padding: 18px, 20px;
 }
 
-.control-button {
+.small-button{
+    -fx-background-color:transparent;
+    -fx-min-width: 23px;
+    -fx-min-height: 23px;
+    -fx-max-height:23px;
+    -fx-background-position: 50%;
+    -fx-background-repeat: no-repeat no-repeat;
+}
+
+.big-button{
+    -fx-background-position: 50%;
     -fx-min-height: 44;
     -fx-min-width: 44;
     -fx-background-radius: 22;
     -fx-border-radius: 22;
-    -fx-background-position: center;
     -fx-background-color: transparent;
-    -fx-background-repeat: no-repeat no-repeat;
     -fx-border-size: 1px;
-    -fx-border-color: #707070;
+    -fx-border-color: white;
     -fx-border-style: solid;
-    -fx-background-size: 65%;
-    -fx-opacity: 0.6;
+    -fx-background-repeat: no-repeat no-repeat;
 }
 
-.control-button:hover {
-    -fx-border-color:dodgerblue;
+.button-opacity{
+    -fx-opacity: 0.7;
+}
+
+.button-opacity:hover{
     -fx-opacity: 1;
 }
 
-#repeat{
-    -fx-background-image: url("../../assets/icons/png3x/repeat@3x.png");
-    -fx-background-position: 50%;
+/* TOP CONTROLS */
+
+#playlist-btn{
+    -fx-background-image: url("../../assets/icons/png1x/playlist.png");
 }
 
-#skip-back{
-    -fx-background-image: url("../../assets/icons/png3x/skip_back@3x.png");
-    -fx-background-position: 50%;
+/* TITLES */
+
+#titles-box{
+    -fx-min-height: 81px;
+    -fx-max-height: 81px;
 }
 
-#play{
-    -fx-background-image: url("../../assets/icons/png3x/play@3x.png");
+#title {
+    -fx-text-align: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+#artist {
+    -fx-text-align: center;
+    -fx-font-size: 16;
+    -fx-opacity: 0.8;
+}
+
+/* TIME CONTROL */
+
+#time-control{
+    -fx-min-height:42px;
+}
+
+.time-labels{
+    -fx-font-size: 11;
+    -fx-opacity: 0.8;
+}
+
+#current-time{
+    -fx-text-align: left;
+}
+
+#remaining-time{
+    -fx-text-align: right;
+}
+
+/* CONTROLS */
+
+#control-box{
+    -fx-alignment: center;
+    -fx-min-height: 50px;
+}
+
+#repeat-btn{
+    -fx-background-image: url("../../assets/icons/png1x/repeat.png");
+}
+
+#skip-back-btn{
+    -fx-background-image: url("../../assets/icons/png1x/skip_back.png");
+}
+
+#play-btn{
+    -fx-background-image: url("../../assets/icons/png1x/play.png");
     -fx-background-position: 60%;
 }
 
-#pause{
-    -fx-background-image: url("../../assets/icons/png3x/pause@3x.png");
-    -fx-background-position: 50%;
+#pause-btn{
+    -fx-background-image: url("../../assets/icons/png1x/pause.png");
 }
 
-#skip-next{
-    -fx-background-image: url("../../assets/icons/png3x/skip_next@3x.png");
-    -fx-background-position: 50%;
+#skip-next-btn{
+    -fx-background-image: url("../../assets/icons/png1x/skip_next.png");
 }
 
-#shuffle{
-    -fx-background-image: url("../../assets/icons/png3x/shuffle@3x.png");
-    -fx-background-position: 50%;
+#shuffle-btn{
+    -fx-background-image: url("../../assets/icons/png1x/shuffle.png");
+}
+
+/* VOLUME CONTROLS */
+
+#volume-controls{
+    -fx-min-height: 50px;
+    -fx-padding-top: 8px;
+}
+
+#volume-btn{
+    -fx-background-image: url("../../assets/icons/png1x/volume_down.png");
 }
