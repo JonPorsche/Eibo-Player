@@ -9,6 +9,7 @@ public class MP3Player {
     private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
     public boolean isPlaying;
+    public int position = 0;
 
     public void play(String title) {
         audioPlayer = minim.loadMP3File("music/" + title + ".mp3");
@@ -27,7 +28,7 @@ public class MP3Player {
             @Override
             public void run() {
                 isPlaying = true;
-                audioPlayer.play();
+                audioPlayer.play(position);
             }
         }.start();
 
@@ -36,6 +37,7 @@ public class MP3Player {
     public void pause() {
         isPlaying = false;
         audioPlayer.pause();
+        position = audioPlayer.position();
     }
 
     public void volume(String gain){
