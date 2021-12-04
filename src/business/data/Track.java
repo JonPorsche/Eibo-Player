@@ -1,9 +1,12 @@
 package business.data;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Track {
 
     private long id;
-    private String title;
+    private ReadOnlyStringWrapper title;
     private long length;
     private String albumTitle;
     private String artist;
@@ -11,11 +14,15 @@ public class Track {
 
     public Track(long id, String title, long length, String albumTitle, String artist, String songFilePath) {
         this.id = id;
-        this.title = title;
+        this.title = new ReadOnlyStringWrapper(title, "title");
         this.length = length;
         this.albumTitle = albumTitle;
         this.artist = artist;
         this.songFilePath = songFilePath;
+    }
+
+    public final ReadOnlyStringWrapper tittleProperty(){
+        return this.title;
     }
 
     public long getId() {
@@ -26,12 +33,8 @@ public class Track {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public final java.lang.String getTitle() {
+        return this.tittleProperty().get();
     }
 
     public long getLength() {

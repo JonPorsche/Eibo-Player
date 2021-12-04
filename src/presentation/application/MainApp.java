@@ -18,7 +18,7 @@ public class MainApp extends Application {
     private static PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
     private static Playlist playlist;
-    Map<String, Pane> scenes;
+    private Map<String, Pane> scenes;
 
     public static void main(String[] args) {
 

@@ -31,7 +31,7 @@ public class PlayerView extends VBox {
 
     // TIME CONTROL
     VBox timeControlBox = new VBox();
-    Slider durationSlider = new Slider();
+    Slider timeSlider = new Slider();
     HBox timeLabels = new HBox();
     HBox remainingTimeBox = new HBox();
     Label currentTimeLabel;
@@ -124,7 +124,7 @@ public class PlayerView extends VBox {
      * */
     private void timeControl() {
         // Create elements
-        currentTimeLabel = new Label("1:40");
+        currentTimeLabel = new Label("0:00");
         remainingTimeLabel = new Label("-3:08");
 
         // Style
@@ -147,7 +147,7 @@ public class PlayerView extends VBox {
         );
 
         timeControlBox.getChildren().addAll(
-                durationSlider,
+                timeSlider,
                 timeLabels
         );
     }
