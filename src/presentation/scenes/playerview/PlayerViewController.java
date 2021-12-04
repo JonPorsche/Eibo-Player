@@ -1,8 +1,7 @@
 package presentation.scenes.playerview;
 
+import business.data.Playlist;
 import business.service.MP3Player;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,7 @@ public class PlayerViewController {
     Label artistLabel;
     ImageView coverView;
     Button playButton;
+    Button skipNextButton;
     Pane rootView;
     MP3Player player;
 
@@ -26,6 +26,7 @@ public class PlayerViewController {
         this.artistLabel = mainView.artistLabel;
         this.coverView = mainView.coverView;
         this.playButton = mainView.playButton;
+        this.skipNextButton = mainView.skipNextButton;
 
         rootView = mainView;
 
@@ -34,6 +35,7 @@ public class PlayerViewController {
 
     public void initialize(){
         playButton.setOnAction(event -> startPlayer());
+        skipNextButton.setOnAction(event -> skipNext());
     }
 
     public Pane getRootView() {
@@ -48,5 +50,9 @@ public class PlayerViewController {
             playButton.setId("pause-btn");
             player.play();
         }
+    }
+
+    private void skipNext() {
+        player.skipNext();
     }
 }

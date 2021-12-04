@@ -1,5 +1,6 @@
 package presentation.application;
 
+import business.data.Playlist;
 import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
@@ -14,20 +15,29 @@ import java.util.Map;
 
 public class MainApp extends Application {
 
+    private static PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
+    private static Playlist playlist;
     Map<String, Pane> scenes;
 
     public static void main(String[] args) {
 
         // Load playlist
-        new Thread(() -> {
+/*        new Thread(() -> {
             try {
                 PlaylistManager playlistManager = new PlaylistManager();
-                playlistManager.getAllTracks("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
+                playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
+        }).start();*/
+
+        try {
+            playlist = playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // GUI
         new Thread(() -> launch(args)).start();
@@ -38,7 +48,8 @@ public class MainApp extends Application {
     /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
-        this.player = new MP3Player();
+
+        this.player = new MP3Player(playlist);
 
         try {
             scenes = new HashMap<String, Pane>();
@@ -68,7 +79,7 @@ public class MainApp extends Application {
          */
             primaryStage.setTitle("Player");
             primaryStage.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,7 +88,7 @@ public class MainApp extends Application {
     public void init() {
 
         *//* in der Anwednung gibt es einen Player, der dann von allen
-         * Seiten/Views bzw. deren Controllern aus erreichbar ist
-         *//*
+     * Seiten/Views bzw. deren Controllern aus erreichbar ist
+     *//*
     }*/
 }

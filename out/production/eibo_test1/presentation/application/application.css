@@ -1,0 +1,32 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.bkg{
+	-fx-background-color: #121212;
+}
+
+.border-to-test{
+	-fx-border-size: 1px;
+	-fx-border-color: dodgerblue;
+	-fx-border-style: solid;
+}
+
+.border-to-test-gray{
+	-fx-border-size: 1px;
+	-fx-border-color: gray;
+	-fx-border-style: solid;
+}
+
+.text-color{
+}
+
+.main-text{
+	-fx-font-family: Helvetica;
+	-fx-text-fill: white;
+}
+
+.second-text {
+	-fx-alignment: center;
+	-fx-font-family: Helvetica;
+	-fx-font-size: 14;
+	-fx-padding: 3px, 10px;
+}

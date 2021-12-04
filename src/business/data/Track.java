@@ -7,15 +7,15 @@ public class Track {
     private long length;
     private String albumTitle;
     private String artist;
-    private String soundFile;
+    private String songFilePath;
 
-    public Track(long id, String title, long length, String albumTitle, String artist, String soundFile) {
+    public Track(long id, String title, long length, String albumTitle, String artist, String songFilePath) {
         this.id = id;
         this.title = title;
         this.length = length;
         this.albumTitle = albumTitle;
         this.artist = artist;
-        this.soundFile = soundFile;
+        this.songFilePath = songFilePath;
     }
 
     public long getId() {
@@ -58,11 +58,11 @@ public class Track {
         this.artist = artist;
     }
 
-    public String getSoundFile() {
-        return soundFile;
+    public String getSongFilePath() {
+        return songFilePath;
     }
 
-    public void setSoundFile(String soundFile) {
-        this.soundFile = soundFile;
+    public void setSongFilePath(String songFilePath) {
+        this.songFilePath = songFilePath;
     }
 }

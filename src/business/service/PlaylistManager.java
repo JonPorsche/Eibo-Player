@@ -12,9 +12,10 @@ import java.util.ArrayList;
 
 public class PlaylistManager {
 
-    private ArrayList<Track> tracks = new ArrayList<Track>();
+    public ArrayList<Track> tracks = new ArrayList<Track>();
+    public Playlist playlist;
 
-    public Playlist getAllTracks(String sDir) throws IOException {
+    public Playlist getPlaylist(String sDir) throws IOException {
 
         File[] faFiles = new File(sDir).listFiles(); // load files of dir into array
         File m3uFile = new File("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/playlists/playlist.m3u"); // create new M3U playlist file
@@ -33,7 +34,7 @@ public class PlaylistManager {
                 tracks.add(loadTrackInfo(path));
             }
             if (file.isDirectory()) {
-                getAllTracks(file.getAbsolutePath());
+                getPlaylist(file.getAbsolutePath());
             }
         }
         bw.close();
@@ -43,7 +44,7 @@ public class PlaylistManager {
         return playlist;
     }
 
-    public Track loadTrackInfo(String filePath) {
+    public Track loadTrackInfo(String songFilePath) {
 
         String title = null;
         long length = 0;
@@ -51,7 +52,7 @@ public class PlaylistManager {
         String artist = null;
 
         try {
-            Mp3File mp3File = new Mp3File(filePath);
+            Mp3File mp3File = new Mp3File(songFilePath);
             if (mp3File.hasId3v1Tag()) {
                 ID3v1 id3v1Tag = mp3File.getId3v1Tag();
                 artist = id3v1Tag.getArtist();
@@ -65,6 +66,6 @@ public class PlaylistManager {
             System.err.println("File not found.");
             e.printStackTrace();
         }
-        return new Track(1, title, length, albumTitle, artist, filePath);
+        return new Track(1, title, length, albumTitle, artist, songFilePath);
     }
 }
