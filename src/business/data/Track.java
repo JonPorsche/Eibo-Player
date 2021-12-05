@@ -1,28 +1,24 @@
 package business.data;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Track {
 
     private long id;
-    private ReadOnlyStringWrapper title;
-    private long length;
+    private String title;
+    private int duration;
     private String albumTitle;
     private String artist;
-    private String songFilePath;
+    private String trackFilePath;
+    private String coverFilePath;
 
-    public Track(long id, String title, long length, String albumTitle, String artist, String songFilePath) {
+
+    public Track(long id, String title, int duration, String albumTitle, String artist, String trackFilePath) {
         this.id = id;
-        this.title = new ReadOnlyStringWrapper(title, "title");
-        this.length = length;
+        this.title = title;
+        this.duration = duration;
         this.albumTitle = albumTitle;
         this.artist = artist;
-        this.songFilePath = songFilePath;
-    }
-
-    public final ReadOnlyStringWrapper tittleProperty(){
-        return this.title;
+        this.trackFilePath = trackFilePath;
+        this.coverFilePath = "/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/" + artist + " - " + albumTitle + ".jpg";
     }
 
     public long getId() {
@@ -33,17 +29,19 @@ public class Track {
         this.id = id;
     }
 
-    public final java.lang.String getTitle() {
-        return this.tittleProperty().get();
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public long getLength() {
-        return length;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLength(long length) {
-        this.length = length;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public int getDuration(){return duration;}
 
     public String getAlbumTitle() {
         return albumTitle;
@@ -61,11 +59,15 @@ public class Track {
         this.artist = artist;
     }
 
-    public String getSongFilePath() {
-        return songFilePath;
+    public String getTrackFilePath() {
+        return trackFilePath;
     }
 
-    public void setSongFilePath(String songFilePath) {
-        this.songFilePath = songFilePath;
+    public void setTrackFilePath(String trackFilePath) {
+        this.trackFilePath = trackFilePath;
+    }
+
+    public String getCoverFilePath() {
+        return coverFilePath;
     }
 }

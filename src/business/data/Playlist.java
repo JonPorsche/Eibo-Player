@@ -22,16 +22,8 @@ public class Playlist {
         this.coverFile = coverFile;
     }
 
-    public void numberOfTracks(){
-        System.out.println("Number of tracks = " + tracks.size());
-    }
-
-    public void trackInfos(){
-        System.out.println("\nPlaylist:");
-        for(int i=0; i < tracks.size(); i++) {
-            System.out.println(tracks.get(i).getArtist() + " - " + tracks.get(i).getTitle() + " - " + tracks.get(i).getSongFilePath());
-        }
-        System.out.println("\n");
+    public int numberOfTracks(){
+        return tracks.size();
     }
 
     public ArrayList<Track> getTracks() {

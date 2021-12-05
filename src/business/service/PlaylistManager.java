@@ -40,14 +40,13 @@ public class PlaylistManager {
         bw.close();
         Playlist playlist = new Playlist(tracks);
         playlist.numberOfTracks();
-        playlist.trackInfos();
         return playlist;
     }
 
     public Track loadTrackInfo(String songFilePath) {
 
         String title = null;
-        long length = 0;
+        int duration = 0;
         String albumTitle = null;
         String artist = null;
 
@@ -57,7 +56,7 @@ public class PlaylistManager {
                 ID3v1 id3v1Tag = mp3File.getId3v1Tag();
                 artist = id3v1Tag.getArtist();
                 title = id3v1Tag.getTitle();
-                length = mp3File.getLengthInSeconds();
+                duration = (int)mp3File.getLengthInSeconds() * 1000;
                 albumTitle = id3v1Tag.getAlbum();
             } else {
                 System.out.println("The mp3 file does not exists or does not have a ID3v1Tag");
@@ -66,6 +65,6 @@ public class PlaylistManager {
             System.err.println("File not found.");
             e.printStackTrace();
         }
-        return new Track(1, title, length, albumTitle, artist, songFilePath);
+        return new Track(1, title, duration, albumTitle, artist, songFilePath);
     }
 }
