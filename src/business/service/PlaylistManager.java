@@ -2,11 +2,7 @@ package business.service;
 
 import business.data.Playlist;
 import business.data.Track;
-import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
+import com.mpatric.mp3agic.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -49,15 +45,17 @@ public class PlaylistManager {
         int duration = 0;
         String albumTitle = null;
         String artist = null;
+        byte[] albumImage = null;
 
         try {
             Mp3File mp3File = new Mp3File(songFilePath);
-            if (mp3File.hasId3v1Tag()) {
-                ID3v1 id3v1Tag = mp3File.getId3v1Tag();
-                artist = id3v1Tag.getArtist();
-                title = id3v1Tag.getTitle();
+            if (mp3File.hasId3v2Tag()) {
+                ID3v2 id3v2Tag = mp3File.getId3v2Tag();
+                artist = id3v2Tag.getArtist();
+                title = id3v2Tag.getTitle();
                 duration = (int)mp3File.getLengthInSeconds() * 1000;
-                albumTitle = id3v1Tag.getAlbum();
+                albumTitle = id3v2Tag.getAlbum();
+                albumImage = id3v2Tag.getAlbumImage();
             } else {
                 System.out.println("The mp3 file does not exists or does not have a ID3v1Tag");
             }
@@ -65,6 +63,6 @@ public class PlaylistManager {
             System.err.println("File not found.");
             e.printStackTrace();
         }
-        return new Track(1, title, duration, albumTitle, artist, songFilePath);
+        return new Track(1, title, duration, albumTitle, artist, songFilePath, albumImage);
     }
 }

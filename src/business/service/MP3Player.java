@@ -4,6 +4,7 @@ import business.data.Playlist;
 import business.data.Track;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -11,18 +12,24 @@ public class MP3Player {
 
     private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
-    public int currentTrackIndex = 0;
-    public boolean isPlaying;
+    public int trackNumber = 0;
+    private SimpleBooleanProperty isPlaying;
+    private SimpleBooleanProperty isFirstTrack;
     private SimpleIntegerProperty currentTime;
     private SimpleIntegerProperty remainingTime;
     private SimpleObjectProperty<Track> track;
     public Playlist playlist;
+    private Thread playThread;
+    private int numberOfTracks; // used further to test if there are remaining Tracks
 
     public MP3Player(Playlist playlist) {
         this.playlist = playlist;
         currentTime = new SimpleIntegerProperty();
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
+        isPlaying = new SimpleBooleanProperty();
+        isFirstTrack = new SimpleBooleanProperty(true);
+        numberOfTracks = playlist.numberOfTracks();
     }
 
     public void play(String title) {
@@ -36,51 +43,100 @@ public class MP3Player {
     }
 
     public void play() {
-
         minim = new SimpleMinim();
-
-        setTrack(playlist.getTracks().get(currentTrackIndex));
-
+        setTrack(playlist.getTracks().get(trackNumber));
         int duration = track.get().getDuration(); // used further to calculate remaining time
-        int numberOfTracks = playlist.numberOfTracks(); // used further to test if there are remaining Tracks
-
         String trackPath = track.get().getTrackFilePath();
         audioPlayer = minim.loadMP3File(trackPath);
 
-        new Thread() {
+        playThread = new Thread(new Runnable() {
+
             @Override
             public void run() {
-                new Thread() {
+                    System.out.println("Hello from Play thread");
+                    Thread currentTimeThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Hello from Current Time thread");
+                            while (true) {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    System.out.println("Current Time thread says: Another thread woke me up");
+                                    return;
+                                }
+                                currentTime.setValue(audioPlayer.position());
+                                remainingTime.setValue(duration - currentTime.get());
+                            }
+                        }
+                    });
+                    currentTimeThread.start();
+
+                    isPlaying.set(true);
+                    audioPlayer.play(currentTime.getValue());
+                    currentTimeThread.interrupt();
+
+                    if (!isPlaying.get() && isLastTrack()) {
+                        skipNext();
+                    } else {
+                        isPlaying.setValue(false);
+                    }
+                }
+        });
+        playThread.start();
+
+/*        new Thread() {
+            @Override
+            public void run() {
+
+                this.setName("Play Thread");
+                System.out.println("Hello from " + this.getName());
+
+                Thread currentTimeThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        System.out.println("Hello from Current Time thread");
                         while (true) {
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                System.out.println("Thread was interrupted, Failed to complete operation");
+                                //Thread.currentThread().interrupt();
+                                System.out.println("Another thread woke me up");
+                                return;
                             }
                             currentTime.setValue(audioPlayer.position());
                             remainingTime.setValue(duration - currentTime.get());
                         }
                     }
-                }.start();
-                isPlaying = true;
-                audioPlayer.play(currentTime.getValue());
+                });
 
-                if (isPlaying & hasNextTrack()) skipNext();
-                else isPlaying = false;
+                currentTimeThread.start();
+
+                isPlaying.set(true);
+                audioPlayer.play(currentTime.getValue());
+                currentTimeThread.interrupt();
+
+                if (isPlaying.get() && !isLastTrack()) {
+                    skipNext();
+                } else {
+                    isPlaying.setValue(false);
+                }
             }
 
-            private boolean hasNextTrack(){
-                if(currentTrackIndex < numberOfTracks - 1) return true;
+            private boolean isLastTrack() {
+                if (currentTrackIndex == numberOfTracks - 1) return true;
                 return false;
             }
-        }.start();
+        }.start();*/
+    }
+
+    private boolean isLastTrack() {
+        if (trackNumber == numberOfTracks - 1) return true;
+        return false;
     }
 
     public void pause() {
-        isPlaying = false;
+        isPlaying.set(false);
         currentTime.setValue(audioPlayer.position());
         audioPlayer.pause();
     }
@@ -91,9 +147,10 @@ public class MP3Player {
     }
 
     public void skipNext() {
-        currentTrackIndex++;
-        currentTime.setValue(0);
-        play();
+            audioPlayer.pause();
+            trackNumber++;
+            currentTime.setValue(0);
+            play();
     }
 
     public int getCurrentTime() {
@@ -118,6 +175,27 @@ public class MP3Player {
 
     public final SimpleObjectProperty<Track> trackProperty() {
         return this.track;
+    }
+
+    public SimpleBooleanProperty isPlayingProperty() {
+        return isPlaying;
+    }
+
+    public boolean isPlaying() {
+        return isPlaying.get();
+    }
+
+    public void setIsPlaying(boolean isPlaying) {
+        this.isPlaying.set(isPlaying);
+    }
+
+    public SimpleBooleanProperty isFirstTrackProperty(){
+        return isFirstTrack;
+    }
+
+    void draw()
+    {
+
     }
 }
 

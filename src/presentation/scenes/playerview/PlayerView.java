@@ -108,7 +108,7 @@ public class PlayerView extends VBox {
         coverView = new ImageView();
 
         try {
-            coverView.setImage(new Image(new FileInputStream("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/Iron Maiden - Fear Of The Dark.jpg")));
+            coverView.setImage(new Image(new FileInputStream("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/Dummy Cover.jpg")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package business.data;
 
+import java.awt.image.BufferedImage;
+
 public class Track {
 
     private long id;
@@ -9,9 +11,14 @@ public class Track {
     private String artist;
     private String trackFilePath;
     private String coverFilePath;
+    private byte[] albumImage;
 
 
-    public Track(long id, String title, int duration, String albumTitle, String artist, String trackFilePath) {
+    public byte[] getAlbumImage() {
+        return albumImage;
+    }
+
+    public Track(long id, String title, int duration, String albumTitle, String artist, String trackFilePath, byte[] albumImage) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -19,6 +26,7 @@ public class Track {
         this.artist = artist;
         this.trackFilePath = trackFilePath;
         this.coverFilePath = "/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/" + artist + " - " + albumTitle + ".jpg";
+        this.albumImage = albumImage;
     }
 
     public long getId() {

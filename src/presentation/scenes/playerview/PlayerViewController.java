@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -51,8 +53,11 @@ public class PlayerViewController {
     public void initialize() {
         playButton.setOnAction(event -> startPlayer());
         skipNextButton.setOnAction(event -> skipNext());
-
         currentTimeLabel.setText(formatTime(player.getCurrentTime()));
+        remainingTimeLabel.setText("-" + formatTime(player.playlist.getTracks().get(0).getDuration()));
+        titleLabel.setText(player.playlist.getTracks().get(0).getTitle());
+        artistLabel.setText(player.playlist.getTracks().get(0).getArtist());
+        coverView.setImage(new Image(new ByteArrayInputStream(player.playlist.getTracks().get(0).getAlbumImage())));
 
         // Just to keep a full declaration example:
         /*
@@ -85,14 +90,16 @@ public class PlayerViewController {
                     titleLabel.setText(player.getTrack().getTitle());
                     artistLabel.setText(player.getTrack().getArtist());
                     timeSlider.setMax(player.getTrack().getDuration());
-
-                    try {
-                        coverView.setImage(new Image(new FileInputStream(player.getTrack().getCoverFilePath())));
-                    } catch (FileNotFoundException e) {
-                        System.err.println("Cover file not found.");
-                        //e.printStackTrace();
-                    }
+                    coverView.setImage(new Image(new ByteArrayInputStream(player.getTrack().getAlbumImage())));
                 });
+            }
+        });
+
+        player.isPlayingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(player.isPlaying()) playButton.setId("pause-btn");
+                else playButton.setId("play-btn");
             }
         });
     }
@@ -102,11 +109,9 @@ public class PlayerViewController {
     }
 
     private void startPlayer() {
-        if (player.isPlaying) {
-            playButton.setId("play-btn");
+        if (player.isPlaying()) {
             player.pause();
         } else {
-            playButton.setId("pause-btn");
             player.play();
         }
     }
