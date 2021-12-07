@@ -5,7 +5,7 @@ import java.io.FilenameFilter;
 
 public class TestDirScan {
     public static void main(String[] args) {
-        printFnames("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
+        printFnames("/Users/jonporsche/Documents");
     }
 
     public static void printFnames(String sDir) {

@@ -12,10 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class PlayerViewController {
     Label titleLabel;
@@ -53,7 +50,7 @@ public class PlayerViewController {
     public void initialize() {
         playButton.setOnAction(event -> startPlayer());
         skipNextButton.setOnAction(event -> skipNext());
-        currentTimeLabel.setText(formatTime(player.getCurrentTime()));
+        currentTimeLabel.setText(formatTime(player.getPosition()));
         remainingTimeLabel.setText("-" + formatTime(player.playlist.getTracks().get(0).getDuration()));
         titleLabel.setText(player.playlist.getTracks().get(0).getTitle());
         artistLabel.setText(player.playlist.getTracks().get(0).getArtist());
@@ -72,7 +69,7 @@ public class PlayerViewController {
 //        timeSlider.valueProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue.doubleValue()));
         volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue.doubleValue()));
 
-        player.currentTimeProperty().addListener(new ChangeListener<Number>() {
+        player.positionProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Platform.runLater(() -> currentTimeLabel.setText(formatTime(newValue.intValue())));
