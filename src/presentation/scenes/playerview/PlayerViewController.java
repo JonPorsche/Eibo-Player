@@ -114,6 +114,7 @@ public class PlayerViewController {
     }
 
     private void skipNext() {
+        System.out.println("+++ PlayerViewController.skipNext: Pressed.");
         player.skipNext();
     }
 

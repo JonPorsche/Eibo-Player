@@ -33,23 +33,27 @@ public class MP3Player {
         isFirstTrack = new SimpleBooleanProperty(true);
         numberOfTracks = playlist.numberOfTracks();
         minim = new SimpleMinim();
+        System.out.println("+++ MP3Player: minim instance started.");
     }
 
     public void play() {
+        minim = new SimpleMinim();
+        System.out.println("+++ play: new minim instance started.");
         if(isTrackLoaded) {
+            System.out.println("+++ play: track number " + trackNumber + " is loaded");
             playThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("+++ Play thread started +++");
+                    System.out.println("+++ playThread: Started.");
                     Thread currentTimeThread = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            System.out.println("+++ Current Time thread started +++");
+                            System.out.println("+++ currentTimeThread: Started.");
                             while (true) {
                                 try {
                                     Thread.sleep(1000);
                                 } catch (InterruptedException e) {
-                                    System.out.println("+++ Current Time thread says: Another thread woke me up +++\n");
+                                    System.out.println("+++ currentTimeThread: Another thread woke me up +++");
                                     return;
                                 }
                                 position.setValue(audioPlayer.position());
@@ -61,17 +65,28 @@ public class MP3Player {
 
                     isPlaying.set(true);
                     audioPlayer.play(position.getValue());
+                    System.out.println("+++ playThread: Player status = " +  audioPlayer.isPlaying());
                     currentTimeThread.interrupt();
+                    System.out.println("+++ playThread: position = " + position.get());
+                    System.out.println("+++ playThread: duration = " + duration);
 
-                    if (isPlaying.get() && !isLastTrack()) {
+                    if (position.getValue()>duration-1000) skipNext();
+/*
+                    if(!audioPlayer.isPlaying()) skipNext();
+*/
+                    //playNext();
+                    //skipNext();
+/*                    if (isPlaying.get() && !isLastTrack()) {
                         playNext();
                     } else {
+                        minim.stop();
                         isPlaying.setValue(false);
-                    }
+                    }*/
                 }
             });
             playThread.start();
         } else{
+            System.out.println("+++ play: track is not loaded");
             loadTrack();
             play();
         }
@@ -121,25 +136,28 @@ public class MP3Player {
     }
 
     public void loadTrack() {
+        minim.stop();
         setTrack(playlist.getTracks().get(trackNumber));
         duration = track.get().getDuration(); // used further to calculate remaining time
         String trackPath = track.get().getTrackFilePath();
         audioPlayer = minim.loadMP3File(trackPath);
 
-        System.out.println("\n### " + trackNumber + " - " + track.get().getTitle() + " - " + track.get().getArtist() + " ###\n");
-
+        System.out.println("+++ loadTrack: Loaded track " + trackNumber + " - " + track.get().getTitle() + " - " + track.get().getArtist());
         isTrackLoaded = true;
     }
 
     private boolean isLastTrack() {
         if (trackNumber == numberOfTracks - 1){
-            System.out.println("*** Is last track ***\n");
+            System.out.println("+++ isLastTrack: Track number = " + trackNumber);
             return true;
         }
+        System.out.println("+++ isLastTrack: Is not the last track.");
         return false;
     }
 
     public void pause() {
+        minim.stop();
+        System.out.println("+++ pause: Paused.");
         isPlaying.set(false);
         audioPlayer.pause();
         position.setValue(audioPlayer.position());
@@ -152,28 +170,36 @@ public class MP3Player {
     }
 
     public void skipNext() {
+        minim.stop();
         if(!isLastTrack()) {
             trackNumber++;
+            System.out.println("+++ skipNext: It was not the last track.");
             position.setValue(0);
             if (isPlaying.get()) {
-                System.out.println("+++ is playing when skip next pressed +++");
+                System.out.println("+++ skipNext: It was playing when skip next pressed.");
                 audioPlayer.pause();
-                System.out.println("Player is playing = " + audioPlayer.isPlaying());
                 // kill the running play thread?
+                System.out.println("+++ skipNext: Load and play track number " + trackNumber);
                 loadTrack();
                 play();
             } else {
+                System.out.println("+++ skipNext: It was not playing when skip next pressed.");
+                System.out.println("+++ skipNext: Load track number " + trackNumber);
+
                 loadTrack();
             }
         } else {
-            System.out.println("!!! Cannot skip !!!");
+            System.out.println("!!! skipNext: Cannot skip!");
             return;
         }
     }
 
     public void playNext() {
+        minim.stop();
+        audioPlayer.pause();
         position.setValue(0);
         trackNumber++;
+        System.out.println("+++ playNext: Load and play the track number " + trackNumber);
         loadTrack();
         play();
     }
