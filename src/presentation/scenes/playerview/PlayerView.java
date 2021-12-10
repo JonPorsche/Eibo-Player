@@ -19,6 +19,7 @@ public class PlayerView extends VBox {
 
     // TOP CONTROLS
     HBox topControlsBox = new HBox();
+    Button playlistAddButton = new Button();
     Button playlistButton = new Button();
 
     // TITLES
@@ -74,12 +75,15 @@ public class PlayerView extends VBox {
 
     private void topControls() {
         // Style
+        playlistAddButton.getStyleClass().addAll("small-button", "button-opacity");
+        playlistAddButton.setId("playlist-add-btn");
         playlistButton.getStyleClass().addAll("small-button", "button-opacity");
         playlistButton.setId("playlist-btn");
         topControlsBox.setAlignment(Pos.CENTER_RIGHT);
+        HBox.setMargin(playlistButton, new Insets(0,0,0,8));
 
         // Add elements
-        topControlsBox.getChildren().add(playlistButton);
+        topControlsBox.getChildren().addAll(playlistAddButton, playlistButton);
     }
 
     private void titles() {
