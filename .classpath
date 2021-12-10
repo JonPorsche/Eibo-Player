@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/eibo_simpleminim_new.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/jsminim.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/minim.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/mp3agic.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/mp3spi1.9.5.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/ProgUtil_StaticScanner.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/tritonus_aos.jar"/>
+	<classpathentry kind="lib" path="/Users/jonporsche/Documents/Dev Projects.nosync/java_libraries/eibo/tritonus_share.jar"/>
+	<classpathentry kind="output" path="out/production/eibo_test1"/>
+</classpath>

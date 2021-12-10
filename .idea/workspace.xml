@@ -1,7 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8d4bd02d-6d9e-40ff-8509-45b7ef4f3250" name="Changes" comment="" />
+    <list default="true" id="8d4bd02d-6d9e-40ff-8509-45b7ef4f3250" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/eibo_test1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/eibo_simpleminim_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/03 Animal.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/05 Perfect Strangers.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/07 A Tout le Monde.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/07 Blue Sky Mine.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/09 Avantasia.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/1-04 Learning To Fly.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/music/Somebody.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Playlist.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Track.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/KeyboardController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/MainApp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/application.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/Dummy Cover.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/The Beatles - White Album.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/Wir Sind Helden - Bring Mich Nach Hause.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/Yes - Lonely Heart.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/playlist.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/repeat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/shuffle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/skip_back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/skip_next.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/volume_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/volume_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png1x/volume_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/pause@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/play@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/playlist@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/repeat@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/shuffle@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/skip_back@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/skip_next@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/volume_down@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/volume_off@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/icons/png3x/volume_up@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerView.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/tests/GetFilesRecursive.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/tests/ListFiles.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/tests/TestDirScan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/eibo_test1/tests/TestMP3Tags.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/Die Toten Hosen - &quot;Ballast Der Republik&quot; plus Ju.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/Dummy Cover.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/Iron Maiden - Fear Of The Dark.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/The Beatles - White Album.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/Wir Sind Helden - Bring Mich Nach Hause.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/album_covers/Yes - Lonely Heart.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/pause.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/playlist.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/repeat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/shuffle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/skip_back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/skip_next.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/volume_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/volume_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png1x/volume_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/pause@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/play@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/playlist@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/repeat@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/shuffle@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/skip_back@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/skip_next@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/volume_down@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/volume_off@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/assets/icons/png3x/volume_up@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/GetFilesRecursive.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/ListFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eibo_test1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/eibo_test1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music/12 Fear Of The Dark.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/playlists/playlist.m3u" beforeDir="false" afterPath="$PROJECT_DIR$/playlists/playlist.m3u" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/data/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/data/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/data/Track.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/data/Track.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/service/KeyboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/service/KeyboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/service/MP3Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/service/MP3Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/service/PlaylistManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/service/PlaylistManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/application/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/application/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/application/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/application/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/assets/album_covers/Die Toten Hosen - Ballast Der Republik.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/Die Toten Hosen - &quot;Ballast Der Republik&quot; plus Ju.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/assets/album_covers/Iron Maiden - Fear Of The Dark.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/assets/album_covers/Iron Maiden - Fear Of The Dark.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/assets/icons/png/play@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/assets/icons/svg/play.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/scenes/playerview/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/scenes/playerview/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/Filter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestDirScan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestDirScan.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

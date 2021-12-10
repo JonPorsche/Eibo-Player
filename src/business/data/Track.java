@@ -1,21 +1,32 @@
 package business.data;
 
+import java.awt.image.BufferedImage;
+
 public class Track {
 
     private long id;
     private String title;
-    private long length;
+    private int duration;
     private String albumTitle;
     private String artist;
-    private String soundFile;
+    private String trackFilePath;
+    private String coverFilePath;
+    private byte[] albumImage;
 
-    public Track(long id, String title, long length, String albumTitle, String artist, String soundFile) {
+
+    public byte[] getAlbumImage() {
+        return albumImage;
+    }
+
+    public Track(long id, String title, int duration, String albumTitle, String artist, String trackFilePath, byte[] albumImage) {
         this.id = id;
         this.title = title;
-        this.length = length;
+        this.duration = duration;
         this.albumTitle = albumTitle;
         this.artist = artist;
-        this.soundFile = soundFile;
+        this.trackFilePath = trackFilePath;
+        this.coverFilePath = "/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/src/presentation/assets/album_covers/" + artist + " - " + albumTitle + ".jpg";
+        this.albumImage = albumImage;
     }
 
     public long getId() {
@@ -26,6 +37,10 @@ public class Track {
         this.id = id;
     }
 
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -34,13 +49,7 @@ public class Track {
         this.title = title;
     }
 
-    public long getLength() {
-        return length;
-    }
-
-    public void setLength(long length) {
-        this.length = length;
-    }
+    public int getDuration(){return duration;}
 
     public String getAlbumTitle() {
         return albumTitle;
@@ -58,11 +67,15 @@ public class Track {
         this.artist = artist;
     }
 
-    public String getSoundFile() {
-        return soundFile;
+    public String getTrackFilePath() {
+        return trackFilePath;
     }
 
-    public void setSoundFile(String soundFile) {
-        this.soundFile = soundFile;
+    public void setTrackFilePath(String trackFilePath) {
+        this.trackFilePath = trackFilePath;
+    }
+
+    public String getCoverFilePath() {
+        return coverFilePath;
     }
 }

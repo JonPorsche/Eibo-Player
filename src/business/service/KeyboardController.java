@@ -1,5 +1,6 @@
 package business.service;
 
+import business.service.MP3Player;
 import de.hsrm.mi.prog.util.StaticScanner;
 
 public class KeyboardController{
@@ -8,6 +9,7 @@ public class KeyboardController{
     private static final String PAUSE = "pause";
     private static final String VOLUME = "volume";
 
+    /*
     private MP3Player mp3Player = new MP3Player();
     private StaticScanner scanner = new StaticScanner();
 
@@ -43,7 +45,7 @@ public class KeyboardController{
                         break;
                 }
         }
-    }
+    }*/
 
 /*    public void start() {
         MP3Player mp3Player = new MP3Player();
