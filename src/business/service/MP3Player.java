@@ -71,17 +71,6 @@ public class MP3Player {
                     System.out.println("+++ playThread: duration = " + duration);
 
                     if (position.getValue()>duration-1000) skipNext();
-/*
-                    if(!audioPlayer.isPlaying()) skipNext();
-*/
-                    //playNext();
-                    //skipNext();
-/*                    if (isPlaying.get() && !isLastTrack()) {
-                        playNext();
-                    } else {
-                        minim.stop();
-                        isPlaying.setValue(false);
-                    }*/
                 }
             });
             playThread.start();
