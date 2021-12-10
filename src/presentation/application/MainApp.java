@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
+import presentation.scenes.playlistview.PlaylistViewController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class MainApp extends Application {
     private MP3Player player;
     private static Playlist playlist;
     private Map<String, Pane> scenes;
+    private Stage primaryStage;
 
     public static void main(String[] args) {
 
@@ -58,8 +60,11 @@ public class MainApp extends Application {
             /*Pane view = new PlayerView();
             scenes.put("PlayerView", view);*/
 
-            PlayerViewController playerViewController = new PlayerViewController(player);
+            PlayerViewController playerViewController = new PlayerViewController(this, player);
             scenes.put("PlayerView", playerViewController.getRootView());
+
+            PlaylistViewController playlistViewController = new PlaylistViewController(this, player);
+            scenes.put("PlaylistView", playlistViewController.getRootView());
 
             // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden
             Pane root = scenes.get("PlayerView");
@@ -70,6 +75,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(root, 360, 640);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
+            this.primaryStage = primaryStage;
             primaryStage.setScene(scene);
             /*primaryStage.minWidthProperty().bind(scene.heightProperty().multiply(2));
             primaryStage.minHeightProperty().bind(scene.widthProperty().divide(2));*/
@@ -77,10 +83,16 @@ public class MainApp extends Application {
             /*  es muss explizit gesagt werden , dass das Fenster sichtbar
             gemacht werden soll
          */
-            primaryStage.setTitle("Player");
+            primaryStage.setTitle("iTues");
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void switchScene(String scene) {
+        if (scenes.containsKey(scene) ) {
+            primaryStage.getScene().setRoot(scenes.get(scene));
         }
     }
 

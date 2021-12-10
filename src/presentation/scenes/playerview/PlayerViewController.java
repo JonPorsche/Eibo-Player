@@ -11,28 +11,32 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import presentation.application.MainApp;
 
 import java.io.ByteArrayInputStream;
 
 public class PlayerViewController {
-    Label titleLabel;
-    Label artistLabel;
-    ImageView coverView;
-    Slider timeSlider;
-    Button playButton;
-    Button skipNextButton;
-    Slider volumeSlider;
-    Pane rootView;
-    MP3Player player;
-    Label currentTimeLabel;
-    Label remainingTimeLabel;
+    private MainApp application;
+    private Button playlistButton;
+    private Label titleLabel;
+    private Label artistLabel;
+    private ImageView coverView;
+    private Slider timeSlider;
+    private Button playButton;
+    private Button skipNextButton;
+    private Slider volumeSlider;
+    private Pane rootView;
+    private MP3Player player;
+    private Label currentTimeLabel;
+    private Label remainingTimeLabel;
 
-    public PlayerViewController(MP3Player player) {
-
+    public PlayerViewController(MainApp application, MP3Player player) {
+        this.application = application;
         this.player = player;
 
         PlayerView mainView = new PlayerView();
 
+        this.playlistButton = mainView.playlistButton;
         this.titleLabel = mainView.titleLabel;
         this.artistLabel = mainView.artistLabel;
         this.coverView = mainView.coverView;
@@ -48,6 +52,7 @@ public class PlayerViewController {
     }
 
     public void initialize() {
+        playlistButton.setOnAction(event -> application.switchScene("PlaylistView"));
         playButton.setOnAction(event -> startPlayer());
         skipNextButton.setOnAction(event -> skipNext());
         currentTimeLabel.setText(formatTime(player.getPosition()));
