@@ -18,6 +18,7 @@ public class MP3Player {
     public int trackNumber = 0;
     private ArrayList<Track> tracks;
     private SimpleBooleanProperty isPlaying;
+    private SimpleBooleanProperty isMuted;
     private SimpleBooleanProperty isLooping;
     private SimpleBooleanProperty isShuffling;
     private SimpleBooleanProperty isFirstTrack;
@@ -40,6 +41,7 @@ public class MP3Player {
         isShuffling = new SimpleBooleanProperty();
         isPlaying = new SimpleBooleanProperty();
         isFirstTrack = new SimpleBooleanProperty(true);
+        isMuted = new SimpleBooleanProperty();
         numberOfTracks = playlist.numberOfTracks();
         minim = new SimpleMinim();
         System.out.println("+++ MP3Player: minim instance started.");
@@ -73,6 +75,7 @@ public class MP3Player {
                     currentTimeThread.start();
 
                     isPlaying.set(true);
+                    System.out.println("+++ play: initial gain = " + audioPlayer.getGain());
                     audioPlayer.play(position.getValue());
                     System.out.println("+++ playThread: Player status = " + audioPlayer.isPlaying());
                     currentTimeThread.interrupt();
@@ -188,9 +191,10 @@ public class MP3Player {
 
     }
 
-    public void volume(String gain) {
-        float newGain = Float.parseFloat(gain);
-        audioPlayer.setGain(newGain);
+    public void volume(float gain) {
+        //audioPlayer.setGain(gain);
+        audioPlayer.shiftGain(audioPlayer.getGain(),gain,500);
+        System.out.println("+++ volume: " + gain);
     }
 
     public void skipNext() {
@@ -307,6 +311,10 @@ public class MP3Player {
         }
     }
 
+    public void mute(){
+        audioPlayer.mute();
+    }
+
     public int getPosition() {
         return position.get();
     }
@@ -367,6 +375,18 @@ public class MP3Player {
         this.isShuffling.set(isShuffling);
     }
 
+    public SimpleBooleanProperty isMutedProperty() {
+        return isMuted;
+    }
+
+    public boolean isMuted() {
+        return isMuted.get();
+    }
+
+    public void setIsMuted(boolean isMuted) {
+        this.isMuted.set(isMuted);
+    }
+
     public SimpleBooleanProperty isFirstTrackProperty() {
         return isFirstTrack;
     }
@@ -386,6 +406,10 @@ public class MP3Player {
     public void resetTrackOrder() {
         playlist.setTracks(PlaylistManager.trackList);
         System.out.println("+++ resetTrackOrder: " + PlaylistManager.trackList.toString());
+    }
+
+    public void unmute() {
+        audioPlayer.unmute();
     }
 }
 

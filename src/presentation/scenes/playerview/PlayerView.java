@@ -196,10 +196,11 @@ public class PlayerView extends VBox {
         volumeControls.setId("volume-controls");
         volumeControls.setAlignment(Pos.CENTER);
 
-        volumeButton.getStyleClass().addAll("small-button", "button");
-        volumeButton.setId("volume-btn");
+        volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-max");
 
         volumeSlider.setPrefWidth(185);
+        volumeSlider.setMax(10);
+        volumeSlider.setMin(-10);
         HBox.setMargin(volumeSlider, new Insets(0,4,0,4));
 
         // Add elements

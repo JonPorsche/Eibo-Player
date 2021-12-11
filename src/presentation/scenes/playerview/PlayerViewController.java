@@ -27,6 +27,7 @@ public class PlayerViewController {
     private Button playButton;
     private Button skipNextButton;
     private Button skipBackButton;
+    private Button volumeButton;
     private Slider volumeSlider;
     private Pane rootView;
     private MP3Player player;
@@ -49,6 +50,7 @@ public class PlayerViewController {
         this.playButton = mainView.playButton;
         this.skipNextButton = mainView.skipNextButton;
         this.skipBackButton = mainView.skipBackButton;
+        this.volumeButton = mainView.volumeButton;
         this.volumeSlider = mainView.volumeSlider;
         this.currentTimeLabel = mainView.currentTimeLabel;
         this.remainingTimeLabel = mainView.remainingTimeLabel;
@@ -59,6 +61,7 @@ public class PlayerViewController {
 
     public void initialize() {
         playlistButton.setOnAction(event -> application.switchScene("PlaylistView"));
+        volumeButton.setOnAction(event -> mute());
         loopingButton.setOnAction(event -> loop());
         shuffleButton.setOnAction(event -> shuffle());
         playButton.setOnAction(event -> startPlayer());
@@ -81,7 +84,7 @@ public class PlayerViewController {
          */
 
 //        timeSlider.valueProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue.doubleValue()));
-        volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue.doubleValue()));
+//        volumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue.doubleValue()));
 
         player.positionProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -147,6 +150,56 @@ public class PlayerViewController {
                 }
             }
         });
+
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldVolume, Number newVolume) {
+                player.volume(newVolume.floatValue());
+                if(newVolume.floatValue() >= 0){
+                    volumeButton.getStyleClass().clear();
+                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-max");
+                }
+                else if(newVolume.floatValue() == -10){
+                    mute();
+                }
+                else if(newVolume.floatValue() > -10){
+                    unmute();
+                }
+                else {
+                    volumeButton.getStyleClass().clear();
+                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-min");
+                }
+            }
+        });
+
+        player.isMutedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(player.isMuted()){
+                    volumeButton.getStyleClass().clear();
+                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-off", "button-on");
+                } else {
+                    volumeButton.getStyleClass().clear();
+                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-min", "button-off");
+                }
+            }
+        });
+    }
+
+    private void mute() {
+        if(player.isMuted()) {
+            player.setIsMuted(false);
+            player.unmute();
+        }
+        else {
+            player.setIsMuted(true);
+            player.mute();
+        }
+    }
+
+    public void unmute(){
+        player.unmute();
+        player.setIsMuted(false);
     }
 
     private void shuffle() {

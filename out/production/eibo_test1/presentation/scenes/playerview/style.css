@@ -98,6 +98,14 @@
     -fx-padding-top: 8px;
 }
 
-#volume-btn{
+.volume-btn-max{
+    -fx-background-image: url("../../assets/icons/png1x/volume_up.png");
+}
+
+.volume-btn-min{
     -fx-background-image: url("../../assets/icons/png1x/volume_down.png");
+}
+
+.volume-btn-off{
+    -fx-background-image: url("../../assets/icons/png1x/volume_off.png");
 }
