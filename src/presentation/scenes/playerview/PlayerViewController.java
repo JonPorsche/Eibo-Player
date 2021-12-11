@@ -26,6 +26,7 @@ public class PlayerViewController {
     private Button shuffleButton;
     private Button playButton;
     private Button skipNextButton;
+    private Button skipBackButton;
     private Slider volumeSlider;
     private Pane rootView;
     private MP3Player player;
@@ -47,6 +48,7 @@ public class PlayerViewController {
         this.shuffleButton = mainView.shuffleButton;
         this.playButton = mainView.playButton;
         this.skipNextButton = mainView.skipNextButton;
+        this.skipBackButton = mainView.skipBackButton;
         this.volumeSlider = mainView.volumeSlider;
         this.currentTimeLabel = mainView.currentTimeLabel;
         this.remainingTimeLabel = mainView.remainingTimeLabel;
@@ -61,6 +63,7 @@ public class PlayerViewController {
         shuffleButton.setOnAction(event -> shuffle());
         playButton.setOnAction(event -> startPlayer());
         skipNextButton.setOnAction(event -> skipNext());
+        skipBackButton.setOnAction(event -> skipBack());
         currentTimeLabel.setText(formatTime(player.getPosition()));
         remainingTimeLabel.setText("-" + formatTime(player.playlist.getTracks().get(0).getDuration()));
         titleLabel.setText(player.playlist.getTracks().get(0).getTitle());
@@ -149,6 +152,7 @@ public class PlayerViewController {
     private void shuffle() {
         if (player.isShuffling()){
             player.setIsShuffling(false);
+            player.resetTrackOrder();
         }
         else {
             player.setIsShuffling(true);
@@ -176,6 +180,11 @@ public class PlayerViewController {
     private void skipNext() {
         System.out.println("+++ PlayerViewController.skipNext: Pressed.");
         player.skipNext();
+    }
+
+    private void skipBack() {
+        System.out.println("+++ PlayerViewController.skipBack: Pressed.");
+        player.skipBack();
     }
 
     public String formatTime(int milliseconds) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PlaylistManager {
 
-    public ArrayList<Track> trackList = new ArrayList<Track>();
+    public static final ArrayList<Track> trackList = new ArrayList<Track>();
     public Playlist playlist;
 
     public Playlist getPlaylist(String sDir) throws IOException {

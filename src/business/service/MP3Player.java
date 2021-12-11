@@ -16,6 +16,7 @@ public class MP3Player {
     private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
     public int trackNumber = 0;
+    private ArrayList<Track> tracks;
     private SimpleBooleanProperty isPlaying;
     private SimpleBooleanProperty isLooping;
     private SimpleBooleanProperty isShuffling;
@@ -31,6 +32,7 @@ public class MP3Player {
 
     public MP3Player(Playlist playlist) {
         this.playlist = playlist;
+        tracks = playlist.getTracks();
         position = new SimpleIntegerProperty();
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
@@ -80,8 +82,8 @@ public class MP3Player {
 /*                    if (trackIsFinished() && !isLooping()) skipNext();
                     else if (trackIsFinished() && isLooping()) loop();*/
 
-                    if(trackIsFinished()){
-                        if(isLooping()) loop();
+                    if (trackIsFinished()) {
+                        if (isLooping()) loop();
                         else skipNext();
                     }
                 }
@@ -138,7 +140,7 @@ public class MP3Player {
     }
 
     private boolean trackIsFinished() {
-        if(position.getValue() > duration - 1000) {
+        if (position.getValue() > duration - 1000) {
             System.out.println("+++ trackIsFinished: true");
             return true;
         }
@@ -166,6 +168,17 @@ public class MP3Player {
         return false;
     }
 
+    private void firstTrack() {
+        if (trackNumber == 0) {
+            System.out.println("+++ firstTrack: Track number = " + trackNumber);
+            setFirstTrack(true);
+        }
+        else {
+            System.out.println("+++ firstTrack: Is not the first track.");
+            setFirstTrack(false);
+        }
+    }
+
     public void pause() {
         minim.stop();
         System.out.println("+++ pause: Paused.");
@@ -191,6 +204,7 @@ public class MP3Player {
                 audioPlayer.pause();
                 // kill the running play thread?
                 System.out.println("+++ skipNext: Load and play track number " + trackNumber);
+                position.setValue(0);
                 loadTrack();
                 play();
             } else {
@@ -202,6 +216,62 @@ public class MP3Player {
         } else {
             System.out.println("!!! skipNext: Cannot skip!");
             return;
+        }
+    }
+
+    public boolean isFirstTrack() {
+        return isFirstTrack.get();
+    }
+
+    public void setFirstTrack(boolean isFirstTrack) {
+        this.isFirstTrack.set(isFirstTrack);
+    }
+
+    public void skipBack() {
+        minim.stop();
+        firstTrack();
+        if (!isFirstTrack.getValue()) {
+            //trackNumber--;
+            System.out.println("+++ skipBack: It was not the first track.");
+            //position.setValue(0);
+            if (isPlaying.get()) {
+                System.out.println("+++ skipBack: It was playing when skip back pressed.");
+                audioPlayer.pause();
+                if(position.get()< 2000){
+                    trackNumber--;
+                    position.setValue(0);
+                    loadTrack();
+                    play();
+                } else {
+                    position.setValue(0);
+                    System.out.println("+++ skipBack: Load and play track number " + trackNumber);
+                    //loadTrack();
+                    play();
+                }
+            } else {
+                if(position.get() == 0){
+                    trackNumber--;
+                    loadTrack();
+                } else {
+                    System.out.println("+++ skipBack: It was not playing when skip back pressed.");
+                    System.out.println("+++ skipBack: Load track number " + trackNumber);
+                    position.setValue(0);
+                    //loadTrack();
+                }
+            }
+        } else {
+            if(isPlaying.get()){
+                System.out.println("+++ skipBack: It was playing when skip back pressed.");
+                audioPlayer.pause();
+                position.setValue(0);
+                System.out.println("+++ skipBack: Load and play track number " + trackNumber);
+                loadTrack();
+                play();
+            }
+            else{
+                position.setValue(0);
+                //System.out.println("!!! skipBack: Cannot skip!");
+            }
         }
     }
 
@@ -223,13 +293,13 @@ public class MP3Player {
         play();
     }
 
-    public void shuffle(){
+    public void shuffle() {
         //isShuffling.set(true);
         ArrayList<Track> shuffledTracks = playlist.getTracks();
         Collections.shuffle(shuffledTracks);
         playlist.setTracks(shuffledTracks);
         shuffledTracks.toString();
-        if(!isPlaying()) {
+        if (!isPlaying()) {
             minim.stop();
             position.setValue(0);
             trackNumber++;
@@ -311,6 +381,11 @@ public class MP3Player {
 
     void draw() {
 
+    }
+
+    public void resetTrackOrder() {
+        playlist.setTracks(PlaylistManager.trackList);
+        System.out.println("+++ resetTrackOrder: " + PlaylistManager.trackList.toString());
     }
 }
 
