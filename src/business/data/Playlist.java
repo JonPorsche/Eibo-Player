@@ -29,4 +29,8 @@ public class Playlist {
     public ArrayList<Track> getTracks() {
         return tracks;
     }
+
+    public void setTracks(ArrayList<Track> tracks) {
+        this.tracks = tracks;
+    }
 }

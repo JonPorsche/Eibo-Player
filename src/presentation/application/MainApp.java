@@ -63,7 +63,7 @@ public class MainApp extends Application {
             PlayerViewController playerViewController = new PlayerViewController(this, player);
             scenes.put("PlayerView", playerViewController.getRootView());
 
-            PlaylistViewController playlistViewController = new PlaylistViewController(this, player);
+            PlaylistViewController playlistViewController = new PlaylistViewController(this, playlist, player);
             scenes.put("PlaylistView", playlistViewController.getRootView());
 
             // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden

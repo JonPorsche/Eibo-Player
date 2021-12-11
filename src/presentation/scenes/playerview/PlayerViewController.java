@@ -22,6 +22,8 @@ public class PlayerViewController {
     private Label artistLabel;
     private ImageView coverView;
     private Slider timeSlider;
+    private Button loopingButton;
+    private Button shuffleButton;
     private Button playButton;
     private Button skipNextButton;
     private Slider volumeSlider;
@@ -41,6 +43,8 @@ public class PlayerViewController {
         this.artistLabel = mainView.artistLabel;
         this.coverView = mainView.coverView;
         this.timeSlider = mainView.timeSlider;
+        this.loopingButton = mainView.loopingButton;
+        this.shuffleButton = mainView.shuffleButton;
         this.playButton = mainView.playButton;
         this.skipNextButton = mainView.skipNextButton;
         this.volumeSlider = mainView.volumeSlider;
@@ -53,6 +57,8 @@ public class PlayerViewController {
 
     public void initialize() {
         playlistButton.setOnAction(event -> application.switchScene("PlaylistView"));
+        loopingButton.setOnAction(event -> loop());
+        shuffleButton.setOnAction(event -> shuffle());
         playButton.setOnAction(event -> startPlayer());
         skipNextButton.setOnAction(event -> skipNext());
         currentTimeLabel.setText(formatTime(player.getPosition()));
@@ -100,10 +106,59 @@ public class PlayerViewController {
         player.isPlayingProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(player.isPlaying()) playButton.setId("pause-btn");
-                else playButton.setId("play-btn");
+                if (player.isPlaying()) {
+                    playButton.setId("pause-btn");
+                    playButton.getStyleClass().add("button-on");
+                } else {
+                    playButton.setId("play-btn");
+                }
             }
         });
+
+        player.isLoopingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (player.isLooping()) {
+                    loopingButton.getStyleClass().add("button-on");
+                    System.out.println("+++ player: looping = true");
+                    System.out.println("... classes = " + loopingButton.getStyleClass());
+                } else {
+                    loopingButton.getStyleClass().remove("button-on");
+                    System.out.println("+++ player: looping = false");
+                    System.out.println("... classes = " + loopingButton.getStyleClass());
+                }
+            }
+        });
+
+        player.isShufflingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (player.isShuffling()) {
+                    shuffleButton.getStyleClass().add("button-on");
+                    System.out.println("+++ player: shuffle = true");
+                    System.out.println("... classes = " + shuffleButton.getStyleClass());
+                } else {
+                    shuffleButton.getStyleClass().remove("button-on");
+                    System.out.println("+++ player: shuffle = false");
+                    System.out.println("... classes = " + shuffleButton.getStyleClass());
+                }
+            }
+        });
+    }
+
+    private void shuffle() {
+        if (player.isShuffling()){
+            player.setIsShuffling(false);
+        }
+        else {
+            player.setIsShuffling(true);
+            player.shuffle();
+        }
+    }
+
+    private void loop() {
+        if (player.isLooping()) player.setIsLooping(false);
+        else player.setIsLooping(true);
     }
 
     public Pane getRootView() {

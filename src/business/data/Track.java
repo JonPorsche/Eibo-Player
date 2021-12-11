@@ -78,4 +78,12 @@ public class Track {
     public String getCoverFilePath() {
         return coverFilePath;
     }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                '}';
+    }
 }

@@ -3,12 +3,16 @@ package business.service;
 import business.data.Playlist;
 import business.data.Track;
 import com.mpatric.mp3agic.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class PlaylistManager {
 
-    public ArrayList<Track> tracks = new ArrayList<Track>();
+    public ArrayList<Track> trackList = new ArrayList<Track>();
     public Playlist playlist;
 
     public Playlist getPlaylist(String sDir) throws IOException {
@@ -27,14 +31,16 @@ public class PlaylistManager {
                 path = file.getAbsolutePath();
                 bw.write(path);
                 bw.newLine();
-                tracks.add(loadTrackInfo(path));
+                trackList.add(loadTrackInfo(path));
             }
             if (file.isDirectory()) {
                 getPlaylist(file.getAbsolutePath());
             }
         }
         bw.close();
-        Playlist playlist = new Playlist(tracks);
+
+        Playlist playlist = new Playlist(trackList);
+
         playlist.numberOfTracks();
         return playlist;
     }

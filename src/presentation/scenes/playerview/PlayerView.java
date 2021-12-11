@@ -39,7 +39,7 @@ public class PlayerView extends VBox {
 
     // CONTROLS
     HBox controlBox = new HBox();
-    Button repeatButton = new Button();
+    Button loopingButton = new Button();
     Button skipBackButton = new Button();
     Button playButton = new Button();
     Button skipNextButton = new Button();
@@ -73,7 +73,7 @@ public class PlayerView extends VBox {
 
     private void topControls() {
         // Style
-        playlistButton.getStyleClass().addAll("small-button", "button-opacity");
+        playlistButton.getStyleClass().addAll("small-button", "button");
         playlistButton.setId("playlist-btn");
         topControlsBox.setAlignment(Pos.CENTER_RIGHT);
         HBox.setMargin(playlistButton, new Insets(0,0,0,8));
@@ -156,22 +156,25 @@ public class PlayerView extends VBox {
         // Style
         controlBox.setId("control-box");
 
-        repeatButton.getStyleClass().addAll("small-button", "button-opacity");
-        repeatButton.setId("repeat-btn");
+        loopingButton.getStyleClass().clear();
+        loopingButton.getStyleClass().addAll("small-button", "button");
+        loopingButton.setId("repeat-btn");
+        System.out.println("... classes = " + loopingButton.getStyleClass());
 
-        skipBackButton.getStyleClass().addAll("small-button", "button-opacity");
+        skipBackButton.getStyleClass().addAll("small-button", "button");
         skipBackButton.setId("skip-back-btn");
 
-        playButton.getStyleClass().addAll("big-button", "button-opacity");
+        playButton.getStyleClass().addAll("big-button", "button");
         playButton.setId("play-btn");
 
-        skipNextButton.getStyleClass().addAll("small-button", "button-opacity");
+        skipNextButton.getStyleClass().addAll("small-button", "button");
         skipNextButton.setId("skip-next-btn");
 
-        shuffleButton.getStyleClass().addAll("small-button", "button-opacity");
+        shuffleButton.getStyleClass().clear();
+        shuffleButton.getStyleClass().addAll("small-button", "button");
         shuffleButton.setId("shuffle-btn");
 
-        HBox.setMargin(repeatButton, new Insets(0,31,0,0));
+        HBox.setMargin(loopingButton, new Insets(0,31,0,0));
         HBox.setMargin(skipBackButton, new Insets(0,25,0,0));
         HBox.setMargin(playButton, new Insets(0,4,0,4));
         HBox.setMargin(skipNextButton, new Insets(0,0,0,25));
@@ -180,7 +183,7 @@ public class PlayerView extends VBox {
 
         // Add elements
         controlBox.getChildren().addAll(
-                repeatButton,
+                loopingButton,
                 skipBackButton,
                 playButton,
                 skipNextButton,
@@ -193,7 +196,7 @@ public class PlayerView extends VBox {
         volumeControls.setId("volume-controls");
         volumeControls.setAlignment(Pos.CENTER);
 
-        volumeButton.getStyleClass().addAll("small-button", "button-opacity");
+        volumeButton.getStyleClass().addAll("small-button", "button");
         volumeButton.setId("volume-btn");
 
         volumeSlider.setPrefWidth(185);

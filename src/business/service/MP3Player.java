@@ -8,12 +8,17 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class MP3Player {
 
     private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
     public int trackNumber = 0;
     private SimpleBooleanProperty isPlaying;
+    private SimpleBooleanProperty isLooping;
+    private SimpleBooleanProperty isShuffling;
     private SimpleBooleanProperty isFirstTrack;
     private SimpleIntegerProperty position;
     private SimpleIntegerProperty remainingTime;
@@ -29,6 +34,8 @@ public class MP3Player {
         position = new SimpleIntegerProperty();
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
+        isLooping = new SimpleBooleanProperty();
+        isShuffling = new SimpleBooleanProperty();
         isPlaying = new SimpleBooleanProperty();
         isFirstTrack = new SimpleBooleanProperty(true);
         numberOfTracks = playlist.numberOfTracks();
@@ -39,7 +46,7 @@ public class MP3Player {
     public void play() {
         minim = new SimpleMinim();
         System.out.println("+++ play: new minim instance started.");
-        if(isTrackLoaded) {
+        if (isTrackLoaded) {
             System.out.println("+++ play: track number " + trackNumber + " is loaded");
             playThread = new Thread(new Runnable() {
                 @Override
@@ -65,16 +72,22 @@ public class MP3Player {
 
                     isPlaying.set(true);
                     audioPlayer.play(position.getValue());
-                    System.out.println("+++ playThread: Player status = " +  audioPlayer.isPlaying());
+                    System.out.println("+++ playThread: Player status = " + audioPlayer.isPlaying());
                     currentTimeThread.interrupt();
                     System.out.println("+++ playThread: position = " + position.get());
                     System.out.println("+++ playThread: duration = " + duration);
 
-                    if (position.getValue()>duration-1000) skipNext();
+/*                    if (trackIsFinished() && !isLooping()) skipNext();
+                    else if (trackIsFinished() && isLooping()) loop();*/
+
+                    if(trackIsFinished()){
+                        if(isLooping()) loop();
+                        else skipNext();
+                    }
                 }
             });
             playThread.start();
-        } else{
+        } else {
             System.out.println("+++ play: track is not loaded");
             loadTrack();
             play();
@@ -124,6 +137,15 @@ public class MP3Player {
         }.start();*/
     }
 
+    private boolean trackIsFinished() {
+        if(position.getValue() > duration - 1000) {
+            System.out.println("+++ trackIsFinished: true");
+            return true;
+        }
+        System.out.println("+++ trackIsFinished: false");
+        return false;
+    }
+
     public void loadTrack() {
         minim.stop();
         setTrack(playlist.getTracks().get(trackNumber));
@@ -136,7 +158,7 @@ public class MP3Player {
     }
 
     private boolean isLastTrack() {
-        if (trackNumber == numberOfTracks - 1){
+        if (trackNumber == numberOfTracks - 1) {
             System.out.println("+++ isLastTrack: Track number = " + trackNumber);
             return true;
         }
@@ -160,7 +182,7 @@ public class MP3Player {
 
     public void skipNext() {
         minim.stop();
-        if(!isLastTrack()) {
+        if (!isLastTrack()) {
             trackNumber++;
             System.out.println("+++ skipNext: It was not the last track.");
             position.setValue(0);
@@ -191,6 +213,28 @@ public class MP3Player {
         System.out.println("+++ playNext: Load and play the track number " + trackNumber);
         loadTrack();
         play();
+    }
+
+    public void loop() {
+        minim.stop();
+        audioPlayer.pause();
+        position.setValue(0);
+        loadTrack();
+        play();
+    }
+
+    public void shuffle(){
+        //isShuffling.set(true);
+        ArrayList<Track> shuffledTracks = playlist.getTracks();
+        Collections.shuffle(shuffledTracks);
+        playlist.setTracks(shuffledTracks);
+        shuffledTracks.toString();
+        if(!isPlaying()) {
+            minim.stop();
+            position.setValue(0);
+            trackNumber++;
+            loadTrack();
+        }
     }
 
     public int getPosition() {
@@ -227,6 +271,30 @@ public class MP3Player {
 
     public void setIsPlaying(boolean isPlaying) {
         this.isPlaying.set(isPlaying);
+    }
+
+    public SimpleBooleanProperty isLoopingProperty() {
+        return isLooping;
+    }
+
+    public boolean isLooping() {
+        return isLooping.get();
+    }
+
+    public void setIsLooping(boolean isLooping) {
+        this.isLooping.set(isLooping);
+    }
+
+    public SimpleBooleanProperty isShufflingProperty() {
+        return isShuffling;
+    }
+
+    public boolean isShuffling() {
+        return isShuffling.get();
+    }
+
+    public void setIsShuffling(boolean isShuffling) {
+        this.isShuffling.set(isShuffling);
     }
 
     public SimpleBooleanProperty isFirstTrackProperty() {
