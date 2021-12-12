@@ -8,9 +8,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -59,6 +61,27 @@ public class PlaylistViewController {
             PlaylistManager.selectDirectory();
         });
 
+        trackListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent click) {
+                if(click.getClickCount() == 2){
+                    Track selectedTrack = trackListView.getSelectionModel().getSelectedItem();
+                    player.getTrackNumber(selectedTrack);
+
+                    if(!player.isPlaying() && player.isFirstTrack()){
+                        player.setPosition(0);
+                        player.loadTrack();
+                        player.play();
+                    } else {
+                        player.pause();
+                        player.setPosition(0);
+                        player.loadTrack();
+                        player.play();
+                    }
+                }
+            }
+        });
+
         // set how a cell will look like
         trackListView.setCellFactory(new Callback<ListView<Track>, ListCell<Track>>() {
             @Override
@@ -72,6 +95,8 @@ public class PlaylistViewController {
             @Override
             public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
                 System.out.println(newTrack);
+/*                player.getTrackNumber(newTrack);
+                player.loadTrack();*/
             }
         });
 

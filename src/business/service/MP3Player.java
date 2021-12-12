@@ -97,49 +97,6 @@ public class MP3Player {
             loadTrack();
             play();
         }
-/*        new Thread() {
-            @Override
-            public void run() {
-
-                this.setName("Play Thread");
-                System.out.println("Hello from " + this.getName());
-
-                Thread currentTimeThread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Hello from Current Time thread");
-                        while (true) {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                //Thread.currentThread().interrupt();
-                                System.out.println("Another thread woke me up");
-                                return;
-                            }
-                            currentTime.setValue(audioPlayer.position());
-                            remainingTime.setValue(duration - currentTime.get());
-                        }
-                    }
-                });
-
-                currentTimeThread.start();
-
-                isPlaying.set(true);
-                audioPlayer.play(currentTime.getValue());
-                currentTimeThread.interrupt();
-
-                if (isPlaying.get() && !isLastTrack()) {
-                    skipNext();
-                } else {
-                    isPlaying.setValue(false);
-                }
-            }
-
-            private boolean isLastTrack() {
-                if (currentTrackIndex == numberOfTracks - 1) return true;
-                return false;
-            }
-        }.start();*/
     }
 
     private boolean trackIsFinished() {
@@ -160,6 +117,9 @@ public class MP3Player {
 
         System.out.println("+++ loadTrack: Loaded track " + trackNumber + " - " + track.get().getTitle() + " - " + track.get().getArtist());
         isTrackLoaded = true;
+    }
+
+    public void loadTrackFromList(int trackNumber){
     }
 
     private boolean isLastTrack() {
@@ -319,6 +279,10 @@ public class MP3Player {
         return position.get();
     }
 
+    public void setPosition(int position) {
+        this.position.set(position);
+    }
+
     public final SimpleIntegerProperty positionProperty() {
         return this.position;
     }
@@ -410,6 +374,16 @@ public class MP3Player {
 
     public void unmute() {
         audioPlayer.unmute();
+    }
+
+    public int getTrackNumber(Track track) {
+        for(int i = 0; i < numberOfTracks; i++){
+            if(tracks.get(i).getTitle() == track.getTitle()){
+                trackNumber = i;
+            }
+        }
+        System.out.println("+++ getTrackNumber: " + trackNumber + " = " + tracks.get(trackNumber).toString());
+        return trackNumber;
     }
 }
 
