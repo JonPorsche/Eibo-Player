@@ -18,11 +18,13 @@ public class PlaylistView extends BorderPane {
 
     // LIST VIEW
     VBox trackListContainer = new VBox();
-    ListView<Track> trackListView = new ListView<Track>();
+    ListView<Track> trackListView;
 
     public PlaylistView(){
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         this.getStyleClass().add("container");
+
+        trackListView = new ListView<>();
 
         topControls();
         trackListContainer();
@@ -45,8 +47,8 @@ public class PlaylistView extends BorderPane {
     }
 
     private void trackListContainer() {
-        trackListContainer.getStyleClass().addAll("border-to-test");
-        trackListView.getStyleClass().add("border-to-test-orange");
+        //trackListContainer.getStyleClass().addAll("border-to-test");
+        //trackListView.getStyleClass().add("border-to-test-orange");
         VBox.setMargin(trackListContainer, new Insets(8,0,0,0));
 
         trackListContainer.getChildren().add(trackListView);

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlaylistViewController;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,9 @@ public class MainApp extends Application {
                 e.printStackTrace();
             }
         }).start();*/
+
+        //playlistManager.openFile();
+        //playlistManager.selectDirectory();
 
         try {
             playlist = playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");

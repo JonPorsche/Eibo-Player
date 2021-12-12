@@ -52,3 +52,23 @@
 	-fx-font-size: 14;
 	-fx-padding: 3px, 10px;
 }
+
+
+/*
+.list-view .list-cell {
+	-fx-background-color: blue;
+	-fx-text-fill: black;
+	-fx-min-height: 77px;
+	-fx-max-height:77px;
+}*/
+
+.list-view{
+}
+
+.list-cell{
+	/*-fx-background-color: rgb(39, 39, 39);*/
+	-fx-background-opacity: 0.1;
+/*	-fx-border-size: 1px;
+	-fx-border-color: dodgerblue;
+	-fx-border-style: solid;*/
+}

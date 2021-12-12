@@ -3,9 +3,9 @@ package business.service;
 import business.data.Playlist;
 import business.data.Track;
 import com.mpatric.mp3agic.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
+import javafx.application.Platform;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class PlaylistManager {
 
     public static final ArrayList<Track> trackList = new ArrayList<Track>();
-    public Playlist playlist;
+    public static Playlist playlist;
+    private static String directoryPath;
 
     public Playlist getPlaylist(String sDir) throws IOException {
 
@@ -39,13 +40,35 @@ public class PlaylistManager {
         }
         bw.close();
 
-        Playlist playlist = new Playlist(trackList);
+        playlist = new Playlist(trackList);
 
         playlist.numberOfTracks();
         return playlist;
     }
 
-    public Track loadTrackInfo(String songFilePath) {
+    public static Playlist getPlaylistFromDirectory() {
+
+        File[] faFiles = new File(directoryPath).listFiles(); // load files of dir into array
+
+        String filePath;
+
+        for (File file : faFiles) {
+            if (file.getName().matches("^(.*?)")) {
+                filePath = file.getAbsolutePath();
+                trackList.add(loadTrackInfo(filePath));
+            }
+/*            if (file.isDirectory()) {
+                getPlaylist(file.getAbsolutePath());
+            }*/
+        }
+
+        playlist = new Playlist(trackList);
+
+        playlist.numberOfTracks();
+        return playlist;
+    }
+
+    private static Track loadTrackInfo(String songFilePath) {
 
         String title = null;
         int duration = 0;
@@ -70,5 +93,24 @@ public class PlaylistManager {
             e.printStackTrace();
         }
         return new Track(1, title, duration, albumTitle, artist, songFilePath, albumImage);
+    }
+
+    public void openFile(){
+        FileChooser fileChooser = new FileChooser();
+        Platform.runLater(()->fileChooser.showOpenDialog(null));
+    }
+
+    public static void selectDirectory(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src"));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                File selectedDirectory = directoryChooser.showDialog(null);
+                directoryPath = selectedDirectory.getAbsolutePath();
+                System.out.println(selectedDirectory.getAbsolutePath());
+                getPlaylistFromDirectory();
+            }
+        });
     }
 }
