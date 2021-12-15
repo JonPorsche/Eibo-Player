@@ -1,7 +1,29 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.bkg{
+.container{
+	-fx-padding: 18px, 20px;
 	-fx-background-color: #121212;
+}
+
+.small-button{
+	-fx-background-color:transparent;
+	-fx-min-width: 23px;
+	-fx-min-height: 23px;
+	-fx-max-height:23px;
+	-fx-background-position: 50%;
+	-fx-background-repeat: no-repeat no-repeat;
+}
+
+.button{
+	-fx-opacity: 0.5;
+}
+
+.button:hover{
+	-fx-opacity: 0.7;
+}
+
+.button-on{
+	-fx-opacity: 1;
 }
 
 .border-to-test{
@@ -10,9 +32,9 @@
 	-fx-border-style: solid;
 }
 
-.border-to-test-gray{
+.border-to-test-orange{
 	-fx-border-size: 1px;
-	-fx-border-color: gray;
+	-fx-border-color: orange;
 	-fx-border-style: solid;
 }
 
@@ -29,4 +51,24 @@
 	-fx-font-family: Helvetica;
 	-fx-font-size: 14;
 	-fx-padding: 3px, 10px;
+}
+
+
+/*
+.list-view .list-cell {
+	-fx-background-color: blue;
+	-fx-text-fill: black;
+	-fx-min-height: 77px;
+	-fx-max-height:77px;
+}*/
+
+.list-view{
+}
+
+.list-cell{
+	/*-fx-background-color: rgb(39, 39, 39);*/
+	-fx-background-opacity: 0.1;
+/*	-fx-border-size: 1px;
+	-fx-border-color: dodgerblue;
+	-fx-border-style: solid;*/
 }

@@ -1,0 +1,9 @@
+/* TOP CONTROLS */
+
+#playlist-add-btn{
+    -fx-background-image: url("../../assets/icons/png1x/playlist_add.png");
+}
+
+#close-btn{
+    -fx-background-image: url("../../assets/icons/png1x/close.png");
+}
