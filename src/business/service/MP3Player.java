@@ -7,6 +7,8 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +18,8 @@ public class MP3Player {
     private SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
     public int trackNumber = 0;
-    private ArrayList<Track> tracks;
+    public ObservableList<Track> tracksObservable;
+    public ArrayList<Track> tracks;
     private SimpleBooleanProperty isPlaying;
     private SimpleBooleanProperty isMuted;
     private SimpleBooleanProperty isLooping;
@@ -34,6 +37,7 @@ public class MP3Player {
     public MP3Player(Playlist playlist) {
         this.playlist = playlist;
         tracks = playlist.getTracks();
+        tracksObservable = FXCollections.observableArrayList(PlaylistManager.trackList);
         position = new SimpleIntegerProperty();
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
@@ -110,6 +114,7 @@ public class MP3Player {
 
     public void loadTrack() {
         minim.stop();
+        System.out.println("+++ MP3Player.loadTrack: tracks = " + playlist.getTracks().toString());
         setTrack(playlist.getTracks().get(trackNumber));
         duration = track.get().getDuration(); // used further to calculate remaining time
         String trackPath = track.get().getTrackFilePath();
@@ -384,6 +389,15 @@ public class MP3Player {
         }
         System.out.println("+++ getTrackNumber: " + trackNumber + " = " + tracks.get(trackNumber).toString());
         return trackNumber;
+    }
+
+
+    public ObservableList<Track> getTracksObservable() {
+        return tracksObservable;
+    }
+
+    public void setTracksObservable(ObservableList<Track> tracksObservable) {
+        this.tracksObservable = tracksObservable;
     }
 }
 
