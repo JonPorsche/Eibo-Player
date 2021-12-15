@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import presentation.scenes.playlistview.PlaylistViewController;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -143,16 +144,24 @@ public class PlaylistManager {
             @Override
             public void run() {
                 File selectedDirectory = directoryChooser.showDialog(null);
-                directoryPath = selectedDirectory.getAbsolutePath();
-                System.out.println("+++ PlaylistManager.selectDirectory: directoryPath = " + selectedDirectory.getAbsolutePath());
-                trackList.clear();
-                List<File> files = new ArrayList<>();
-                listf2(directoryPath, files);
-                System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
-                playlist.setTracks(trackList);
-                playlist.numberOfTracks();
-                System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
+                directoryChooser.setTitle("Open mp3 folder");
+                if(selectedDirectory != null) {
+                    System.out.println("Directory choosed");
+
+                    directoryPath = selectedDirectory.getAbsolutePath();
+                    System.out.println("+++ PlaylistManager.selectDirectory: directoryPath = " + selectedDirectory.getAbsolutePath());
+                    trackList.clear();
+                    List<File> files = new ArrayList<>();
+                    listf2(directoryPath, files);
+                    System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
+                    playlist.setTracks(trackList);
+                    playlist.numberOfTracks();
+                    PlaylistViewController.trackListModel.clear();
+                    PlaylistViewController.trackListModel.addAll(trackList);
+                    System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
+                }
             }
+
         });
     }
 

@@ -37,7 +37,8 @@ public class MainApp extends Application {
         }).start();*/
 
         //playlistManager.openFile();
-        //playlistManager.selectDirectory();
+        playlistManager.selectDirectory();
+        ;
         //playlistManager.listf("/Users/jonporsche/Documents", files);
 
         try {

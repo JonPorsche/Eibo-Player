@@ -35,6 +35,8 @@ public class PlaylistViewController {
     private Playlist playlist;
     private Pane rootView;
     private VBox trackListContainer;
+    public static ObservableList<Track> trackListModel = FXCollections.observableArrayList();
+
 
     private ListView<Track> trackListView;
 
@@ -112,11 +114,11 @@ public class PlaylistViewController {
         *  when objects are added, updated and removed.
         * */
 
-        ObservableList<Track> trackListModel = FXCollections.observableArrayList();
         trackListModel = trackListView.getItems();
+        System.out.println("+++ PlaylistViewController.initialize: trackListModel = trackListView.getItems() = " + trackListModel.toString());
         //trackListModel.clear();
         trackListModel.addAll(PlaylistManager.trackList);
-        System.out.println("+++ PlaylistViewController.initialize: trackListModel = " + trackListModel.toString());
+        System.out.println("+++ PlaylistViewController.initialize: trackListModel.addAll(PlaylistManager.trackList) = " + trackListModel.toString());
 
         trackListModel.addListener(new InvalidationListener() {
             @Override

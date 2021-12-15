@@ -124,9 +124,6 @@ public class MP3Player {
         isTrackLoaded = true;
     }
 
-    public void loadTrackFromList(int trackNumber){
-    }
-
     private boolean isLastTrack() {
         if (trackNumber == numberOfTracks - 1) {
             System.out.println("+++ isLastTrack: Track number = " + trackNumber);

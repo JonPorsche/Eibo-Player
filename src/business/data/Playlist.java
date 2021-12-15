@@ -23,6 +23,7 @@ public class Playlist {
     }
 
     public int numberOfTracks(){
+        System.out.println("+++ Playlist.numberOfTracks() = " + tracks.size());
         return tracks.size();
     }
 
