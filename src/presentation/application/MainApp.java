@@ -19,47 +19,26 @@ public class MainApp extends Application {
 
     private static PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
-    //private static Playlist playlist;
     private Map<String, Pane> scenes;
     private Stage primaryStage;
     private static List<File> files = new ArrayList<>();
 
     public static void main(String[] args) {
 
-        // Load playlist
-/*        new Thread(() -> {
-            try {
-                PlaylistManager playlistManager = new PlaylistManager();
-                playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();*/
-
-        //playlistManager.openFile();
-        playlistManager.selectDirectory();
-        ;
-        //playlistManager.listf("/Users/jonporsche/Documents", files);
-
         try {
-            //playlist = playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
             playlistManager.playlist = playlistManager.getPlaylistFromM3U("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // GUI
         new Thread(() -> launch(args)).start();
-
-        //KeyboardController controller = new KeyboardController();
     }
 
     /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
 
-        this.player = new MP3Player(playlistManager.playlist);
 
         try {
             scenes = new HashMap<String, Pane>();
@@ -104,11 +83,14 @@ public class MainApp extends Application {
         }
     }
 
-/*    @Override
+    @Override
     public void init() {
+/*
+         in der Anwednung gibt es einen Player, der dann von allen
+     * Seiten/Views bzw. deren Controllern aus erreichbar ist*/
 
-        *//* in der Anwednung gibt es einen Player, der dann von allen
-     * Seiten/Views bzw. deren Controllern aus erreichbar ist
-     *//*
-    }*/
+        this.player = new MP3Player(playlistManager.playlist);
+
+
+    }
 }

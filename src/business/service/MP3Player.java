@@ -388,6 +388,13 @@ public class MP3Player {
         return trackNumber;
     }
 
+    public void setTrackNumber(int trackNumber) {
+        this.trackNumber = trackNumber;
+    }
+
+    public void setNumberOfTracks(int numberOfTracks) {
+        this.numberOfTracks = numberOfTracks;
+    }
 
     public ObservableList<Track> getTracksObservable() {
         return tracksObservable;

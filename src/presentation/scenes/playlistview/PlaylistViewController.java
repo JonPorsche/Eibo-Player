@@ -120,6 +120,18 @@ public class PlaylistViewController {
         trackListModel.addAll(PlaylistManager.trackList);
         System.out.println("+++ PlaylistViewController.initialize: trackListModel.addAll(PlaylistManager.trackList) = " + trackListModel.toString());
 
+        trackListModel.addListener(new ListChangeListener<Track>() {
+            @Override
+            public void onChanged(Change<? extends Track> c) {
+                System.out.println("+++ PlaylistController.initialize: trackList changed!");
+                player.pause();
+                player.setPosition(0);
+                player.setTrackNumber(0);
+                player.loadTrack();
+                player.setNumberOfTracks(playlist.numberOfTracks());
+            }
+        });
+
         trackListModel.addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
@@ -134,14 +146,6 @@ public class PlaylistViewController {
 
             }
         });
-
-/*        trackListModel.addListener(new ListChangeListener<Track>() {
-            @Override
-            public void onChanged(Change<? extends Track> c) {
-                System.out.println("PlaylistViewController.initialize: trackListModel change listener: Detected a change!");
-            }
-        });*/
-
     }
 
     public Pane getRootView() {
