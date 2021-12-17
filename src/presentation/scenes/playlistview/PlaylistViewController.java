@@ -124,7 +124,9 @@ public class PlaylistViewController {
             @Override
             public void onChanged(Change<? extends Track> c) {
                 System.out.println("+++ PlaylistController.initialize: trackList changed!");
-                player.pause();
+                if(player.isPlaying()){
+                    player.pause();
+                }
                 player.setPosition(0);
                 player.setTrackNumber(0);
                 player.loadTrack();
@@ -144,6 +146,14 @@ public class PlaylistViewController {
             public void onChanged(Change<? extends Track> c) {
                 System.out.println("+++ PlaylistViewController.initialize: List changed");
 
+            }
+        });
+
+        player.trackNumberProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("+++ Track number changed.");
+                trackListView.getSelectionModel().select(player.getTrackNumber());
             }
         });
     }

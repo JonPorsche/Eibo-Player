@@ -129,7 +129,7 @@ public class PlaylistManager {
             System.err.println("File not found.");
             e.printStackTrace();
         }
-        return new Track(1, title, duration, albumTitle, artist, songFilePath, albumImage);
+        return new Track(title, duration, albumTitle, artist, songFilePath, albumImage);
     }
 
     public void openFile() {
@@ -157,7 +157,7 @@ public class PlaylistManager {
                     playlist.setTracks(trackList);
                     playlist.numberOfTracks();
                     PlaylistViewController.trackListModel.clear();
-                    PlaylistViewController.trackListModel.addAll(trackList);
+                    PlaylistViewController.trackListModel.addAll(playlist.getTracks());
                     System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
                 }
             }

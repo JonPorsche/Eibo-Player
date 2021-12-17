@@ -154,21 +154,7 @@ public class PlayerViewController {
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldVolume, Number newVolume) {
-                player.volume(newVolume.floatValue());
-                if(newVolume.floatValue() >= 0){
-                    volumeButton.getStyleClass().clear();
-                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-max");
-                }
-                else if(newVolume.floatValue() == -10){
-                    mute();
-                }
-                else if(newVolume.floatValue() > -10){
-                    unmute();
-                }
-                else {
-                    volumeButton.getStyleClass().clear();
-                    volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-min");
-                }
+                volume(newVolume.floatValue());
             }
         });
 
@@ -184,6 +170,26 @@ public class PlayerViewController {
                 }
             }
         });
+    }
+
+    private void volume(float newVolume){
+        if(!player.isTrackLoaded()){
+            player.setVolume(newVolume);
+        } else {
+            player.volume(newVolume);
+            player.setVolume(newVolume);
+            if (newVolume >= 0) {
+                volumeButton.getStyleClass().clear();
+                volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-max");
+            } else if (newVolume == -10) {
+                mute();
+            } else if (newVolume > -10) {
+                unmute();
+            } else {
+                volumeButton.getStyleClass().clear();
+                volumeButton.getStyleClass().addAll("small-button", "button", "volume-btn-min");
+            }
+        }
     }
 
     private void mute() {

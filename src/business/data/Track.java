@@ -1,10 +1,11 @@
 package business.data;
 
 import java.awt.image.BufferedImage;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Track {
 
-    private long id;
+    private int id;
     private String title;
     private int duration;
     private String albumTitle;
@@ -12,14 +13,15 @@ public class Track {
     private String trackFilePath;
     private String coverFilePath;
     private byte[] albumImage;
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 
 
     public byte[] getAlbumImage() {
         return albumImage;
     }
 
-    public Track(long id, String title, int duration, String albumTitle, String artist, String trackFilePath, byte[] albumImage) {
-        this.id = id;
+    public Track(String title, int duration, String albumTitle, String artist, String trackFilePath, byte[] albumImage) {
+        this.id = ID_GENERATOR.getAndIncrement();
         this.title = title;
         this.duration = duration;
         this.albumTitle = albumTitle;
@@ -33,7 +35,7 @@ public class Track {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -82,8 +84,7 @@ public class Track {
     @Override
     public String toString() {
         return "Track{" +
-                "title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
+                "id=" + id +
                 '}';
     }
 }

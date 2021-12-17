@@ -1,6 +1,7 @@
 package presentation.scenes.playlistview;
 
 import business.data.Track;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
