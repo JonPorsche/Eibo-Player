@@ -246,7 +246,7 @@ public class PlayerViewController {
         player.skipBack();
     }
 
-    public String formatTime(int milliseconds) {
+    public static String formatTime(int milliseconds) {
         int seconds = milliseconds / 1000;
         int hours = seconds / 3600;
         int minutes = (seconds - (3600 * hours)) / 60;

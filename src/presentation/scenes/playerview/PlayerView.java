@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -15,11 +16,14 @@ import presentation.uicomponents.ImageViewPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class PlayerView extends VBox {
+public class PlayerView extends BorderPane {
 
     // TOP CONTROLS
-    HBox topControlsBox = new HBox();
+    HBox topBox = new HBox();
     Button playlistButton = new Button();
+
+    // MIDDLE BOX
+    VBox middleBox = new VBox();
 
     // TITLES
     VBox titlesBox = new VBox();
@@ -28,6 +32,9 @@ public class PlayerView extends VBox {
 
     // COVER
     ImageView coverView;
+
+    // BOTTOM BOX
+    VBox bottomBox = new VBox();
 
     // TIME CONTROL
     VBox timeControlBox = new VBox();
@@ -61,25 +68,26 @@ public class PlayerView extends VBox {
         controls();
         volumeControls();
 
-        this.getChildren().addAll(
-                topControlsBox,
-                titlesBox,
-                cover(),
-                timeControlBox,
-                controlBox,
-                volumeControls
-        );
+        middleBox.getChildren().addAll(titlesBox, cover());
+        middleBox.setAlignment(Pos.CENTER);
+
+        bottomBox.getChildren().addAll(timeControlBox, controlBox, volumeControls);
+        bottomBox.setAlignment(Pos.CENTER);
+
+        this.setTop(topBox);
+        this.setCenter(middleBox);
+        this.setBottom(bottomBox);
     }
 
     private void topControls() {
         // Style
         playlistButton.getStyleClass().addAll("small-button", "button");
         playlistButton.setId("playlist-btn");
-        topControlsBox.setAlignment(Pos.CENTER_RIGHT);
+        topBox.setAlignment(Pos.CENTER_RIGHT);
         HBox.setMargin(playlistButton, new Insets(0,0,0,8));
 
         // Add elements
-        topControlsBox.getChildren().add(playlistButton);
+        topBox.getChildren().add(playlistButton);
     }
 
     private void titles() {
@@ -97,7 +105,7 @@ public class PlayerView extends VBox {
 
         artistLabel.getStyleClass().add("main-text");
         artistLabel.setId("artist");
-        VBox.setMargin(artistLabel, new Insets(8,0,0,0));
+        VBox.setMargin(artistLabel, new Insets(8,0,30,0));
 
         // Add elements
         titlesBox.getChildren().addAll(titleLabel, artistLabel);
@@ -129,11 +137,14 @@ public class PlayerView extends VBox {
 
         // Style
         timeControlBox.setId("time-control");
+        timeControlBox.setMaxWidth(400);
         VBox.setMargin(timeControlBox, new Insets(20,0,0,0));
-        VBox.setMargin(timeLabels, new Insets(4,0,0,0));
+        VBox.setMargin(timeLabels, new Insets(8,0,0,0));
 
         currentTimeLabel.getStyleClass().addAll("time-labels", "main-text");
         remainingTimeLabel.getStyleClass().addAll("time-labels", "main-text");
+
+        timeSlider.getStyleClass().addAll("pretty-slider", "time-slider");
 
         remainingTimeBox.setAlignment(Pos.CENTER_RIGHT);
         HBox.setHgrow(remainingTimeBox, Priority.ALWAYS ); // To make the remaining time label move to the right when the screen gets wider
@@ -201,6 +212,7 @@ public class PlayerView extends VBox {
         volumeSlider.setPrefWidth(185);
         volumeSlider.setMax(10);
         volumeSlider.setMin(-10);
+        volumeSlider.getStyleClass().add("pretty-slider");
         HBox.setMargin(volumeSlider, new Insets(0,4,0,4));
 
         // Add elements

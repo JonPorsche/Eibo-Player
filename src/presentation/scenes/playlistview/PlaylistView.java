@@ -48,8 +48,9 @@ public class PlaylistView extends BorderPane {
 
     private void trackListContainer() {
         //trackListContainer.getStyleClass().addAll("border-to-test");
-        //trackListView.getStyleClass().add("border-to-test-orange");
-        VBox.setMargin(trackListContainer, new Insets(8,0,0,0));
+        trackListView.getStyleClass().add("pretty-list-view");
+
+        BorderPane.setMargin(trackListView, new Insets(6,0,0,0));
 
         trackListContainer.getChildren().add(trackListView);
     }

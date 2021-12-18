@@ -1,7 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 .container{
-	-fx-padding: 18px, 20px;
+	-fx-padding: 24px, 24px;
 	-fx-background-color: #121212;
 }
 
@@ -38,9 +38,6 @@
 	-fx-border-style: solid;
 }
 
-.text-color{
-}
-
 .main-text{
 	-fx-font-family: Helvetica;
 	-fx-text-fill: white;
@@ -51,24 +48,4 @@
 	-fx-font-family: Helvetica;
 	-fx-font-size: 14;
 	-fx-padding: 3px, 10px;
-}
-
-
-/*
-.list-view .list-cell {
-	-fx-background-color: blue;
-	-fx-text-fill: black;
-	-fx-min-height: 77px;
-	-fx-max-height:77px;
-}*/
-
-.list-view{
-}
-
-.list-cell{
-	/*-fx-background-color: rgb(39, 39, 39);*/
-	-fx-background-opacity: 0.1;
-/*	-fx-border-size: 1px;
-	-fx-border-color: dodgerblue;
-	-fx-border-style: solid;*/
 }
