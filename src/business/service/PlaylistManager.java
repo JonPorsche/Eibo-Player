@@ -27,7 +27,7 @@ public class PlaylistManager {
     public Playlist getPlaylistFromM3U(String sDir) throws IOException {
 
         File[] faFiles = new File(sDir).listFiles(); // load files of dir into array
-        File m3uFile = new File("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/playlists/playlist.m3u"); // create new M3U playlist file
+        File m3uFile = new File("./playlists/playlist.m3u"); // create new M3U playlist file
         FileOutputStream fOutStream = new FileOutputStream(m3uFile); // output stream to write to the file
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fOutStream)); // output stream to write to the file
 

@@ -26,7 +26,7 @@ public class MainApp extends Application {
     public static void main(String[] args) {
 
         try {
-            playlistManager.playlist = playlistManager.getPlaylistFromM3U("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
+            playlistManager.playlist = playlistManager.getPlaylistFromM3U("./music");
         } catch (Exception e) {
             e.printStackTrace();
         }
