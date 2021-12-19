@@ -13,12 +13,16 @@ import presentation.scenes.startview.StartViewController;
 import presentation.scenes.controlview.ControlViewController;
 import presentation.scenes.topview.TopViewController;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
+import java.util.Properties;
 
 public class MainApp extends Application {
 
+    private Properties defaultProp = null;
+    private Properties appProp = null;
     private static PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
     private Map<String, Pane> scenes;
@@ -27,6 +31,8 @@ public class MainApp extends Application {
     private Pane centerPane;
     private Pane bottomPane;
     private BorderPane rootBorderPane;
+    private double windowWidth;
+    private double windowHeight;
 
     // CONTROLLERS
     private TopViewController topViewController;
@@ -39,7 +45,7 @@ public class MainApp extends Application {
 
         try {
             playlistManager.playlist = playlistManager.getPlaylistFromM3U("./music");
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -59,7 +65,7 @@ public class MainApp extends Application {
             /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
             als aktuelle darzustellende Szene für die Bühne
          */
-            Scene scene = new Scene(rootBorderPane, 450, 800);
+            Scene scene = new Scene(rootBorderPane, windowWidth, windowHeight);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             this.primaryStage = primaryStage;
@@ -77,7 +83,7 @@ public class MainApp extends Application {
         }
     }
 
-    public void startControllers(){
+    public void startControllers() {
         topViewController = new TopViewController(this);
         playerViewController = new PlayerViewController(this, player);
         playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
@@ -100,7 +106,7 @@ public class MainApp extends Application {
         bottomPane = scenes.get("ControlView");
     }
 
-    private void setRootBorderPanes(){
+    private void setRootBorderPanes() {
         rootBorderPane = new BorderPane();
         rootBorderPane.setTop(topPane);
         rootBorderPane.setCenter(centerPane);
@@ -108,13 +114,13 @@ public class MainApp extends Application {
     }
 
     public void switchScene(String scene) {
-        if (scenes.containsKey(scene) ) {
+        if (scenes.containsKey(scene)) {
             primaryStage.getScene().setRoot(scenes.get(scene));
         }
     }
 
-    public void switchCenterPane(String scene){
-        if(scenes.containsKey(scene)){
+    public void switchCenterPane(String scene) {
+        if (scenes.containsKey(scene)) {
             setCenterPane(scenes.get(scene));
             rootBorderPane.setCenter(centerPane);
         }
@@ -130,12 +136,39 @@ public class MainApp extends Application {
 
     @Override
     public void init() {
-/*
-         in der Anwednung gibt es einen Player, der dann von allen
-     * Seiten/Views bzw. deren Controllern aus erreichbar ist*/
-
         this.player = new MP3Player(playlistManager.playlist);
+        try {
+            defaultProp = new Properties();
+            FileInputStream finDefault = new FileInputStream("./properties/default.xml");
+            defaultProp.loadFromXML(finDefault);
 
+            appProp = new Properties(defaultProp);
+            FileInputStream finIndividual = new FileInputStream("./properties/individual.xml");
+            appProp.loadFromXML(finIndividual);
 
+            windowWidth = Double.valueOf(appProp.getProperty("window_width"));
+            windowHeight = Double.valueOf(appProp.getProperty("window_height"));
+
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stop() {
+        appProp.put("window_width", Double.toString(primaryStage.getWidth()));
+        appProp.put("window_height", Double.toString(primaryStage.getHeight()));
+        try {
+            FileOutputStream fos = new FileOutputStream("./properties/individual.xml");
+            appProp.storeToXML(fos, "window width");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
