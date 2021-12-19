@@ -17,7 +17,6 @@ import java.io.ByteArrayInputStream;
 
 public class PlayerViewController {
     private MainApp application;
-    private Button playlistButton;
     private Label titleLabel;
     private Label artistLabel;
     private ImageView coverView;
@@ -40,7 +39,6 @@ public class PlayerViewController {
 
         PlayerView mainView = new PlayerView();
 
-        this.playlistButton = mainView.playlistButton;
         this.titleLabel = mainView.titleLabel;
         this.artistLabel = mainView.artistLabel;
         this.coverView = mainView.coverView;
@@ -60,7 +58,6 @@ public class PlayerViewController {
     }
 
     public void initialize() {
-        playlistButton.setOnAction(event -> application.switchScene("PlaylistView"));
         volumeButton.setOnAction(event -> mute());
         loopingButton.setOnAction(event -> loop());
         shuffleButton.setOnAction(event -> shuffle());

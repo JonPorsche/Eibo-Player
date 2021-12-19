@@ -8,15 +8,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import presentation.uicomponents.TopView;
+import presentation.uicomponents.TopViewController;
 
 public class PlaylistView extends BorderPane {
 
-    // TOP CONTROLS
-    HBox topControlsBox = new HBox();
-    Button playlistAddButton = new Button();
-    Button closeButton = new Button();
-
-    // LIST VIEW
     VBox trackListContainer = new VBox();
     ListView<Track> trackListView;
 
@@ -25,15 +21,11 @@ public class PlaylistView extends BorderPane {
         this.getStyleClass().add("container");
 
         trackListView = new ListView<>();
-
-        topControls();
         trackListContainer();
-
-        this.setTop(topControlsBox);
         this.setCenter(trackListView);
     }
 
-    private void topControls() {
+/*    private void topControls() {
         // Style
         playlistAddButton.getStyleClass().addAll("small-button", "button");
         playlistAddButton.setId("playlist-add-btn");
@@ -44,14 +36,11 @@ public class PlaylistView extends BorderPane {
 
         // Add elements
         topControlsBox.getChildren().addAll(playlistAddButton, closeButton);
-    }
+    }*/
 
     private void trackListContainer() {
-        //trackListContainer.getStyleClass().addAll("border-to-test");
         trackListView.getStyleClass().add("pretty-list-view");
-
         BorderPane.setMargin(trackListView, new Insets(6,0,0,0));
-
         trackListContainer.getChildren().add(trackListView);
     }
 }

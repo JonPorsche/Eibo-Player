@@ -18,10 +18,6 @@ import java.io.FileNotFoundException;
 
 public class PlayerView extends BorderPane {
 
-    // TOP CONTROLS
-    HBox topBox = new HBox();
-    Button playlistButton = new Button();
-
     // MIDDLE BOX
     VBox middleBox = new VBox();
 
@@ -62,32 +58,19 @@ public class PlayerView extends BorderPane {
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         this.getStyleClass().add("container");
 
-        topControls();
         titles();
         timeControl();
         controls();
         volumeControls();
 
-        middleBox.getChildren().addAll(titlesBox, cover());
+        middleBox.getChildren().addAll(titlesBox, cover(), timeControlBox);
         middleBox.setAlignment(Pos.CENTER);
 
-        bottomBox.getChildren().addAll(timeControlBox, controlBox, volumeControls);
+        bottomBox.getChildren().addAll(controlBox, volumeControls);
         bottomBox.setAlignment(Pos.CENTER);
 
-        this.setTop(topBox);
         this.setCenter(middleBox);
         this.setBottom(bottomBox);
-    }
-
-    private void topControls() {
-        // Style
-        playlistButton.getStyleClass().addAll("small-button", "button");
-        playlistButton.setId("playlist-btn");
-        topBox.setAlignment(Pos.CENTER_RIGHT);
-        HBox.setMargin(playlistButton, new Insets(0,0,0,8));
-
-        // Add elements
-        topBox.getChildren().add(playlistButton);
     }
 
     private void titles() {

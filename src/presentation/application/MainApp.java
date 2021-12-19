@@ -4,10 +4,12 @@ import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlaylistViewController;
+import presentation.uicomponents.TopViewController;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +23,14 @@ public class MainApp extends Application {
     private MP3Player player;
     private Map<String, Pane> scenes;
     private Stage primaryStage;
-    private static List<File> files = new ArrayList<>();
+    private Pane topPane;
+    private Pane centerPane;
+    private BorderPane rootBorderPane;
+
+    // CONTROLLERS
+    private TopViewController topViewController;
+    private PlayerViewController playerViewController;
+    private PlaylistViewController playlistViewController;
 
     public static void main(String[] args) {
 
@@ -38,28 +47,15 @@ public class MainApp extends Application {
     /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
-
-
         try {
-            scenes = new HashMap<String, Pane>();
-
-            // Definition der Screens/Scenes
-            /*Pane view = new PlayerView();
-            scenes.put("PlayerView", view);*/
-
-            PlayerViewController playerViewController = new PlayerViewController(this, player);
-            scenes.put("PlayerView", playerViewController.getRootView());
-
-            PlaylistViewController playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
-            scenes.put("PlaylistView", playlistViewController.getRootView());
-
-            // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden
-            Pane root = scenes.get("PlayerView");
+            startControllers();
+            loadScenes();
+            setInitialView();
 
             /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
             als aktuelle darzustellende Szene für die Bühne
          */
-            Scene scene = new Scene(root, 450, 800);
+            Scene scene = new Scene(rootBorderPane, 450, 800);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             this.primaryStage = primaryStage;
@@ -77,10 +73,47 @@ public class MainApp extends Application {
         }
     }
 
+    public void startControllers(){
+        topViewController = new TopViewController(this);
+        playerViewController = new PlayerViewController(this, player);
+        playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
+    }
+
+    private void loadScenes() {
+        scenes = new HashMap<String, Pane>();
+        scenes.put("TopView", topViewController.getRootView());
+        scenes.put("PlayerView", playerViewController.getRootView());
+        scenes.put("PlaylistView", playlistViewController.getRootView());
+    }
+
+    private void setInitialView() {
+        topPane = scenes.get("TopView");
+        centerPane = scenes.get("PlayerView");
+
+        rootBorderPane = new BorderPane();
+        rootBorderPane.setTop(topPane);
+        rootBorderPane.setCenter(centerPane);
+    }
+
     public void switchScene(String scene) {
         if (scenes.containsKey(scene) ) {
             primaryStage.getScene().setRoot(scenes.get(scene));
         }
+    }
+
+    public void switchCenterPane(String scene){
+        if(scenes.containsKey(scene)){
+            setCenterPane(scenes.get(scene));
+            rootBorderPane.setCenter(centerPane);
+        }
+    }
+
+    public void setTopPane(Pane topPane) {
+        this.topPane = topPane;
+    }
+
+    public void setCenterPane(Pane centerPane) {
+        this.centerPane = centerPane;
     }
 
     @Override

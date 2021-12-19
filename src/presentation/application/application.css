@@ -5,6 +5,10 @@
 	-fx-background-color: #121212;
 }
 
+.bkg{
+	-fx-background-color: #232323;
+}
+
 .small-button{
 	-fx-background-color:transparent;
 	-fx-min-width: 23px;

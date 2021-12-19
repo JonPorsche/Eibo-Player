@@ -23,14 +23,15 @@ import javafx.util.Callback;
 import presentation.application.MainApp;
 import presentation.scenes.playerview.PlayerViewController;
 import javafx.scene.control.Button;
+import presentation.uicomponents.TopView;
+import presentation.uicomponents.TopViewController;
+import sun.applet.Main;
 
 import java.util.ArrayList;
 
 public class PlaylistViewController {
 
-    private Button playlistAddButton;
-    private Button closeButton;
-    private MainApp application;
+    private TopViewController topViewController;
     private MP3Player player;
     private Playlist playlist;
     private Pane rootView;
@@ -41,18 +42,15 @@ public class PlaylistViewController {
     private ListView<Track> trackListView;
 
     public PlaylistViewController(MainApp application, Playlist playlist, MP3Player player){
-        this.application = application;
         this.playlist = playlist;
         this.player = player;
 
-        PlaylistView mainView = new PlaylistView();
+        PlaylistView playlistView = new PlaylistView();
 
-        this.playlistAddButton = mainView.playlistAddButton;
-        this.closeButton = mainView.closeButton;
-        this.trackListContainer = mainView.trackListContainer;
-        this.trackListView = mainView.trackListView;
+        this.trackListContainer = playlistView.trackListContainer;
+        this.trackListView = playlistView.trackListView;
 
-        rootView = mainView;
+        rootView = playlistView;
         initialize();
     }
 
@@ -60,12 +58,6 @@ public class PlaylistViewController {
 
         trackListContainer.getStyleClass().add("container");
         VBox.setMargin(trackListView, new Insets(5,0,5,0));
-
-        closeButton.setOnAction(event -> application.switchScene("PlayerView"));
-
-        playlistAddButton.setOnAction(event -> {
-            PlaylistManager.selectDirectory();
-        });
 
         trackListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
