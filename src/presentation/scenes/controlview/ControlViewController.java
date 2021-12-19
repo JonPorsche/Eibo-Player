@@ -117,12 +117,10 @@ public class ControlViewController {
     }
 
     private void skipNext() {
-        System.out.println("+++ PlayerViewController.skipNext: Pressed.");
         player.skipNext();
     }
 
     private void skipBack() {
-        System.out.println("+++ PlayerViewController.skipBack: Pressed.");
         player.skipBack();
     }
 
@@ -144,12 +142,8 @@ public class ControlViewController {
         player.isLoopingProperty().addListener((observable, oldValue, newValue) -> {
             if (player.isLooping()) {
                 loopingButton.getStyleClass().add("button-on");
-                System.out.println("+++ player: looping = true");
-                System.out.println("... classes = " + loopingButton.getStyleClass());
             } else {
                 loopingButton.getStyleClass().remove("button-on");
-                System.out.println("+++ player: looping = false");
-                System.out.println("... classes = " + loopingButton.getStyleClass());
             }
         });
     }
@@ -158,12 +152,8 @@ public class ControlViewController {
         player.isShufflingProperty().addListener((observable, oldValue, newValue) -> {
             if (player.isShuffling()) {
                 shuffleButton.getStyleClass().add("button-on");
-                System.out.println("+++ player: shuffle = true");
-                System.out.println("... classes = " + shuffleButton.getStyleClass());
             } else {
                 shuffleButton.getStyleClass().remove("button-on");
-                System.out.println("+++ player: shuffle = false");
-                System.out.println("... classes = " + shuffleButton.getStyleClass());
             }
         });
     }

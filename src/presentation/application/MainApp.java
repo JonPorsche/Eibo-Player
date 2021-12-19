@@ -3,7 +3,6 @@ package presentation.application;
 import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -13,7 +12,6 @@ import presentation.scenes.playlistview.PlaylistViewController;
 import presentation.scenes.startview.StartViewController;
 import presentation.scenes.controlview.ControlViewController;
 import presentation.scenes.topview.TopViewController;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
@@ -44,14 +42,9 @@ public class MainApp extends Application {
     private StartViewController startViewController;
 
     public static void main(String[] args) {
-
-
-
-        // GUI
         new Thread(() -> launch(args)).start();
     }
 
-    /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -60,20 +53,11 @@ public class MainApp extends Application {
             setInitialView();
             setRootBorderPanes();
 
-            /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
-            als aktuelle darzustellende Szene für die Bühne
-         */
             Scene scene = new Scene(rootBorderPane, windowWidth, windowHeight);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             this.primaryStage = primaryStage;
             primaryStage.setScene(scene);
-            /*primaryStage.minWidthProperty().bind(scene.heightProperty().multiply(2));
-            primaryStage.minHeightProperty().bind(scene.widthProperty().divide(2));*/
-
-            /*  es muss explizit gesagt werden , dass das Fenster sichtbar
-            gemacht werden soll
-         */
             primaryStage.setTitle("iTues");
             primaryStage.show();
         } catch (Exception e) {
@@ -111,21 +95,11 @@ public class MainApp extends Application {
         rootBorderPane.setBottom(bottomPane);
     }
 
-    public void switchScene(String scene) {
-        if (scenes.containsKey(scene)) {
-            primaryStage.getScene().setRoot(scenes.get(scene));
-        }
-    }
-
     public void switchCenterPane(String scene) {
         if (scenes.containsKey(scene)) {
             setCenterPane(scenes.get(scene));
             rootBorderPane.setCenter(centerPane);
         }
-    }
-
-    public void setTopPane(Pane topPane) {
-        this.topPane = topPane;
     }
 
     public void setCenterPane(Pane centerPane) {
@@ -198,7 +172,7 @@ public class MainApp extends Application {
         appProp.put("playlist-path", playlistPath);
         try {
             FileOutputStream fos = new FileOutputStream("./properties/individual.xml");
-            appProp.storeToXML(fos, "window width");
+            appProp.storeToXML(fos, "Individual Properties");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

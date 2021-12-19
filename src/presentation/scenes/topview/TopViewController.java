@@ -35,7 +35,6 @@ public class TopViewController {
     }
 
     private void handlePlaylistBtnClick() {
-        System.out.println("playlistViewActive = " + playlistViewActive);
         playlistButton.setOnAction(event -> {
             if (playlistViewActive) {
                 application.switchCenterPane("PlayerView");
