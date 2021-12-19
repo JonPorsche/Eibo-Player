@@ -8,15 +8,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import presentation.scenes.playlistview.PlaylistViewController;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 public class MP3Player {
 
@@ -30,7 +27,7 @@ public class MP3Player {
     private SimpleBooleanProperty isLooping;
     private SimpleBooleanProperty isShuffling;
     private SimpleBooleanProperty isFirstTrack;
-    private SimpleIntegerProperty position;
+    private SimpleIntegerProperty playheadPosition;
     private SimpleIntegerProperty trackNumber;
     private SimpleIntegerProperty remainingTime;
     private SimpleObjectProperty<Track> track;
@@ -45,7 +42,7 @@ public class MP3Player {
         this.playlist = playlist;
         tracks = playlist.getTracks();
         tracksObservable = FXCollections.observableArrayList(PlaylistManager.trackList);
-        position = new SimpleIntegerProperty();
+        playheadPosition = new SimpleIntegerProperty();
         trackNumber = new SimpleIntegerProperty(0);
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
@@ -80,8 +77,8 @@ public class MP3Player {
                                     System.out.println("+++ currentTimeThread: Another thread woke me up +++");
                                     return;
                                 }
-                                position.setValue(audioPlayer.position());
-                                remainingTime.setValue(duration - position.get());
+                                playheadPosition.setValue(audioPlayer.position());
+                                remainingTime.setValue(duration - playheadPosition.get());
                             }
                         }
                     });
@@ -89,10 +86,10 @@ public class MP3Player {
 
                     isPlaying.set(true);
                     System.out.println("+++ play: initial gain = " + audioPlayer.getGain());
-                    audioPlayer.play(position.getValue());
+                    audioPlayer.play(playheadPosition.getValue());
                     System.out.println("+++ playThread: Player status = " + audioPlayer.isPlaying());
                     currentTimeThread.interrupt();
-                    System.out.println("+++ playThread: position = " + position.get());
+                    System.out.println("+++ playThread: position = " + playheadPosition.get());
                     System.out.println("+++ playThread: duration = " + duration);
 
 /*                    if (trackIsFinished() && !isLooping()) skipNext();
@@ -113,7 +110,7 @@ public class MP3Player {
     }
 
     private boolean trackIsFinished() {
-        if (position.getValue() > duration - 1000) {
+        if (playheadPosition.getValue() > duration - 1000) {
             System.out.println("+++ trackIsFinished: true");
             return true;
         }
@@ -158,7 +155,7 @@ public class MP3Player {
         System.out.println("+++ pause: Paused.");
         isPlaying.set(false);
         audioPlayer.pause();
-        position.setValue(audioPlayer.position());
+        playheadPosition.setValue(audioPlayer.position());
 
     }
 
@@ -173,13 +170,13 @@ public class MP3Player {
         if (!isLastTrack()) {
             trackNumber.setValue(trackNumber.getValue() + 1);
             System.out.println("+++ skipNext: It was not the last track.");
-            position.setValue(0);
+            playheadPosition.setValue(0);
             if (isPlaying.get()) {
                 System.out.println("+++ skipNext: It was playing when skip next pressed.");
                 audioPlayer.pause();
                 // kill the running play thread?
                 System.out.println("+++ skipNext: Load and play track number " + trackNumber.getValue());
-                position.setValue(0);
+                playheadPosition.setValue(0);
                 loadTrack();
                 play();
             } else {
@@ -212,25 +209,25 @@ public class MP3Player {
             if (isPlaying.get()) {
                 System.out.println("+++ skipBack: It was playing when skip back pressed.");
                 audioPlayer.pause();
-                if (position.get() < 2000) {
+                if (playheadPosition.get() < 2000) {
                     trackNumber.setValue(trackNumber.getValue() - 1);
-                    position.setValue(0);
+                    playheadPosition.setValue(0);
                     loadTrack();
                     play();
                 } else {
-                    position.setValue(0);
+                    playheadPosition.setValue(0);
                     System.out.println("+++ skipBack: Load and play track number " + trackNumber.getValue());
                     //loadTrack();
                     play();
                 }
             } else {
-                if (position.get() == 0) {
+                if (playheadPosition.get() == 0) {
                     trackNumber.setValue(trackNumber.getValue() - 1);
                     loadTrack();
                 } else {
                     System.out.println("+++ skipBack: It was not playing when skip back pressed.");
                     System.out.println("+++ skipBack: Load track number " + trackNumber.getValue());
-                    position.setValue(0);
+                    playheadPosition.setValue(0);
                     //loadTrack();
                 }
             }
@@ -238,12 +235,12 @@ public class MP3Player {
             if (isPlaying.get()) {
                 System.out.println("+++ skipBack: It was playing when skip back pressed.");
                 audioPlayer.pause();
-                position.setValue(0);
+                playheadPosition.setValue(0);
                 System.out.println("+++ skipBack: Load and play track number " + trackNumber.getValue());
                 loadTrack();
                 play();
             } else {
-                position.setValue(0);
+                playheadPosition.setValue(0);
                 //System.out.println("!!! skipBack: Cannot skip!");
             }
         }
@@ -252,7 +249,7 @@ public class MP3Player {
     public void playNext() {
         minim.stop();
         audioPlayer.pause();
-        position.setValue(0);
+        playheadPosition.setValue(0);
         trackNumber.setValue(trackNumber.getValue() + 1);
         System.out.println("+++ playNext: Load and play the track number " + trackNumber.getValue());
         loadTrack();
@@ -262,7 +259,7 @@ public class MP3Player {
     public void loop() {
         minim.stop();
         audioPlayer.pause();
-        position.setValue(0);
+        playheadPosition.setValue(0);
         loadTrack();
         play();
     }
@@ -273,7 +270,7 @@ public class MP3Player {
         PlaylistViewController.trackListModel.addAll(tracks);
         if (!isPlaying()) {
             minim.stop();
-            position.setValue(0);
+            playheadPosition.setValue(0);
             loadTrack();
         }
     }
@@ -299,16 +296,16 @@ public class MP3Player {
         audioPlayer.mute();
     }
 
-    public int getPosition() {
-        return position.get();
+    public int getPlayheadPosition() {
+        return playheadPosition.get();
     }
 
-    public void setPosition(int position) {
-        this.position.set(position);
+    public void setPlayheadPosition(int playheadPosition) {
+        this.playheadPosition.set(playheadPosition);
     }
 
-    public final SimpleIntegerProperty positionProperty() {
-        return this.position;
+    public final SimpleIntegerProperty playheadPositionProperty() {
+        return this.playheadPosition;
     }
 
     public int getTrackNumber() {
@@ -440,6 +437,16 @@ public class MP3Player {
 
     public void setTracksObservable(ObservableList<Track> tracksObservable) {
         this.tracksObservable = tracksObservable;
+    }
+
+    public static String formatTime(int milliseconds) {
+        int seconds = milliseconds / 1000;
+        int hours = seconds / 3600;
+        int minutes = (seconds - (3600 * hours)) / 60;
+        int seg = seconds - ((hours * 3600) + (minutes * 60));
+
+        return String.format("%01d", minutes) + ":" + String.format("%02d", seg);
+
     }
 }
 

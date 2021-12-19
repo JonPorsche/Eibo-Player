@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlaylistViewController;
+import presentation.uicomponents.ControlViewController;
 import presentation.uicomponents.TopViewController;
 
 import java.io.File;
@@ -25,12 +26,14 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private Pane topPane;
     private Pane centerPane;
+    private Pane bottomPane;
     private BorderPane rootBorderPane;
 
     // CONTROLLERS
     private TopViewController topViewController;
     private PlayerViewController playerViewController;
     private PlaylistViewController playlistViewController;
+    private ControlViewController controlViewController;
 
     public static void main(String[] args) {
 
@@ -77,6 +80,7 @@ public class MainApp extends Application {
         topViewController = new TopViewController(this);
         playerViewController = new PlayerViewController(this, player);
         playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
+        controlViewController = new ControlViewController(this, player);
     }
 
     private void loadScenes() {
@@ -84,15 +88,18 @@ public class MainApp extends Application {
         scenes.put("TopView", topViewController.getRootView());
         scenes.put("PlayerView", playerViewController.getRootView());
         scenes.put("PlaylistView", playlistViewController.getRootView());
+        scenes.put("ControlView", controlViewController.getRootView());
     }
 
     private void setInitialView() {
         topPane = scenes.get("TopView");
         centerPane = scenes.get("PlayerView");
+        bottomPane = scenes.get("ControlView");
 
         rootBorderPane = new BorderPane();
         rootBorderPane.setTop(topPane);
         rootBorderPane.setCenter(centerPane);
+        rootBorderPane.setBottom(bottomPane);
     }
 
     public void switchScene(String scene) {

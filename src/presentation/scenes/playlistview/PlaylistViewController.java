@@ -16,16 +16,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import presentation.application.MainApp;
-import presentation.scenes.playerview.PlayerViewController;
-import javafx.scene.control.Button;
-import presentation.uicomponents.TopView;
 import presentation.uicomponents.TopViewController;
-import sun.applet.Main;
 
 import java.util.ArrayList;
 
@@ -67,12 +62,12 @@ public class PlaylistViewController {
                     player.getTrackNumber(selectedTrack);
 
                     if(!player.isPlaying() && player.isFirstTrack()){
-                        player.setPosition(0);
+                        player.setPlayheadPosition(0);
                         player.loadTrack();
                         player.play();
                     } else {
                         player.pause();
-                        player.setPosition(0);
+                        player.setPlayheadPosition(0);
                         player.loadTrack();
                         player.play();
                     }
@@ -119,7 +114,7 @@ public class PlaylistViewController {
                 if(player.isPlaying()){
                     player.pause();
                 }
-                player.setPosition(0);
+                player.setPlayheadPosition(0);
                 player.setTrackNumber(0);
                 player.loadTrack();
                 player.setNumberOfTracks(playlist.numberOfTracks());

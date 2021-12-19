@@ -17,7 +17,6 @@ public class TopViewController {
         this.application = application;
 
         TopView topView = new TopView();
-
         this.playlistAddButton = topView.playlistAddButton;
         this.playlistButton = topView.playlistButton;
         this.playlistViewActive = false;

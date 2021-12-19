@@ -1,6 +1,7 @@
 package presentation.scenes.playlistview;
 
 import business.data.Track;
+import business.service.MP3Player;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -79,7 +80,7 @@ public class TrackCell extends ListCell<Track> {
             title.setText(item.getTitle());
             artist.setText(item.getArtist());
             album.setText(item.getAlbumTitle());
-            duration.setText(PlayerViewController.formatTime(item.getDuration()));
+            duration.setText(MP3Player.formatTime(item.getDuration()));
 
             this.setGraphic(listItemBox);
         }
