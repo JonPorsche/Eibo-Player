@@ -1,7 +1,9 @@
 package presentation.scenes.playerview;
 
+import business.data.Track;
 import business.service.MP3Player;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -76,13 +78,16 @@ public class PlayerViewController {
     }
 
     private void handleTrackChanges() {
-        player.playheadPositionProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> {
-                titleLabel.setText(player.getTrack().getTitle());
-                artistLabel.setText(player.getTrack().getArtist());
-                timeSlider.setMax(player.getTrack().getDuration());
-                coverView.setImage(new Image(new ByteArrayInputStream(player.getTrack().getAlbumImage())));
-            });
+        player.trackProperty().addListener(new ChangeListener<Track>() {
+            @Override
+            public void changed(ObservableValue<? extends Track> observable, Track oldValue, Track newValue) {
+                Platform.runLater(() -> {
+                    titleLabel.setText(player.getTrack().getTitle());
+                    artistLabel.setText(player.getTrack().getArtist());
+                    timeSlider.setMax(player.getTrack().getDuration());
+                    coverView.setImage(new Image(new ByteArrayInputStream(player.getTrack().getAlbumImage())));
+                });
+            }
         });
     }
 
