@@ -86,6 +86,7 @@ public class MP3Player {
 
                     isPlaying.set(true);
                     System.out.println("+++ play: initial gain = " + audioPlayer.getGain());
+                    audioPlayer.setGain(volume.getValue());
                     audioPlayer.play(playheadPosition.getValue());
                     System.out.println("+++ playThread: Player status = " + audioPlayer.isPlaying());
                     currentTimeThread.interrupt();
@@ -294,6 +295,7 @@ public class MP3Player {
 
     public void mute() {
         audioPlayer.mute();
+        setVolume(0);
     }
 
     public int getPlayheadPosition() {

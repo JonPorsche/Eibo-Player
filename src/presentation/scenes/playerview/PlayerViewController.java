@@ -49,38 +49,40 @@ public class PlayerViewController {
         handleTrackChanges();
     }
 
-    private void setTimeLabels(){
+    private void setTimeLabels() {
         currentTimeLabel.setText(MP3Player.formatTime(player.getPlayheadPosition()));
         remainingTimeLabel.setText("-" + MP3Player.formatTime(player.playlist.getTracks().get(0).getDuration()));
     }
 
-    private void setInfoLabels(){
+    private void setInfoLabels() {
         titleLabel.setText(player.playlist.getTracks().get(0).getTitle());
         artistLabel.setText(player.playlist.getTracks().get(0).getArtist());
     }
 
-    private void setCoverImage(){
+    private void setCoverImage() {
         coverView.setImage(new Image(new ByteArrayInputStream(player.playlist.getTracks().get(0).getAlbumImage())));
     }
 
-    private void handlePlayheadPositionChanges(){
+    private void handlePlayheadPositionChanges() {
         player.playheadPositionProperty().addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> currentTimeLabel.setText(MP3Player.formatTime(newValue.intValue())));
             timeSlider.valueProperty().set(newValue.intValue());
         });
     }
 
-    private void handleRemainingTimeChanges(){
+    private void handleRemainingTimeChanges() {
         player.remainingTimeProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) ->
                 Platform.runLater(() -> remainingTimeLabel.setText("-" + MP3Player.formatTime(newValue.intValue()))));
     }
 
-    private void handleTrackChanges(){
+    private void handleTrackChanges() {
         player.playheadPositionProperty().addListener((observable, oldValue, newValue) -> {
-            titleLabel.setText(player.getTrack().getTitle());
-            artistLabel.setText(player.getTrack().getArtist());
-            timeSlider.setMax(player.getTrack().getDuration());
-            coverView.setImage(new Image(new ByteArrayInputStream(player.getTrack().getAlbumImage())));
+            Platform.runLater(() -> {
+                titleLabel.setText(player.getTrack().getTitle());
+                artistLabel.setText(player.getTrack().getArtist());
+                timeSlider.setMax(player.getTrack().getDuration());
+                coverView.setImage(new Image(new ByteArrayInputStream(player.getTrack().getAlbumImage())));
+            });
         });
     }
 
