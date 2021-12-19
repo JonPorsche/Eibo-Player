@@ -9,13 +9,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlaylistViewController;
-import presentation.uicomponents.ControlViewController;
-import presentation.uicomponents.TopViewController;
+import presentation.scenes.startview.StartViewController;
+import presentation.scenes.controlview.ControlViewController;
+import presentation.scenes.topview.TopViewController;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainApp extends Application {
@@ -34,12 +33,13 @@ public class MainApp extends Application {
     private PlayerViewController playerViewController;
     private PlaylistViewController playlistViewController;
     private ControlViewController controlViewController;
+    private StartViewController startViewController;
 
     public static void main(String[] args) {
 
         try {
             playlistManager.playlist = playlistManager.getPlaylistFromM3U("./music");
-        } catch (Exception e) {
+        } catch (IOException e){
             e.printStackTrace();
         }
 
@@ -54,6 +54,7 @@ public class MainApp extends Application {
             startControllers();
             loadScenes();
             setInitialView();
+            setRootBorderPanes();
 
             /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
             als aktuelle darzustellende Szene für die Bühne
@@ -81,6 +82,7 @@ public class MainApp extends Application {
         playerViewController = new PlayerViewController(this, player);
         playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
         controlViewController = new ControlViewController(this, player);
+        startViewController = new StartViewController(this);
     }
 
     private void loadScenes() {
@@ -89,13 +91,16 @@ public class MainApp extends Application {
         scenes.put("PlayerView", playerViewController.getRootView());
         scenes.put("PlaylistView", playlistViewController.getRootView());
         scenes.put("ControlView", controlViewController.getRootView());
+        scenes.put("StartView", startViewController.getRootView());
     }
 
     private void setInitialView() {
         topPane = scenes.get("TopView");
         centerPane = scenes.get("PlayerView");
         bottomPane = scenes.get("ControlView");
+    }
 
+    private void setRootBorderPanes(){
         rootBorderPane = new BorderPane();
         rootBorderPane.setTop(topPane);
         rootBorderPane.setCenter(centerPane);

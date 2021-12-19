@@ -1,4 +1,4 @@
-package presentation.uicomponents;
+package presentation.scenes.topview;
 
 import business.service.PlaylistManager;
 import javafx.scene.control.Button;

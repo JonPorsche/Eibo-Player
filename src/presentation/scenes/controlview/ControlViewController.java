@@ -1,4 +1,4 @@
-package presentation.uicomponents;
+package presentation.scenes.controlview;
 
 import business.service.MP3Player;
 import javafx.beans.value.ChangeListener;

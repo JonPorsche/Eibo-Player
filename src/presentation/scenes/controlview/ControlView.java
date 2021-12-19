@@ -1,4 +1,4 @@
-package presentation.uicomponents;
+package presentation.scenes.controlview;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

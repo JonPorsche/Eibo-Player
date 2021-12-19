@@ -1,4 +1,4 @@
-package presentation.uicomponents;
+package presentation.scenes.topview;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

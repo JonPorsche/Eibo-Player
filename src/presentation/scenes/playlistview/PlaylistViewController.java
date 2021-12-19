@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import presentation.application.MainApp;
-import presentation.uicomponents.TopViewController;
+import presentation.scenes.topview.TopViewController;
 
 import java.util.ArrayList;
 

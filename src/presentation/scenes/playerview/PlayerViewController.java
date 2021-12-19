@@ -12,7 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import presentation.application.MainApp;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class PlayerViewController {
     private MainApp application;
@@ -61,8 +66,26 @@ public class PlayerViewController {
         artistLabel.setText(player.playlist.getTracks().get(0).getArtist());
     }
 
-    private void setCoverImage() {
-        coverView.setImage(new Image(new ByteArrayInputStream(player.playlist.getTracks().get(0).getAlbumImage())));
+    private void setCoverImage(){
+        try{
+            coverView.setImage(new Image(new ByteArrayInputStream(player.playlist.getTracks().get(0).getAlbumImage())));
+        } catch (NullPointerException e){
+            BufferedImage bImage = null;
+            try {
+                bImage = ImageIO.read(new File("../../Dummy Cover.jpg"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            try {
+                ImageIO.write(bImage, "jpg", bos );
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            byte [] dummyImage = bos.toByteArray();
+            coverView.setImage(new Image(new ByteArrayInputStream(dummyImage)));
+
+        }
     }
 
     private void handlePlayheadPositionChanges() {
