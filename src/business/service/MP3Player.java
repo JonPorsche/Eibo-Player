@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import presentation.application.MainApp;
 import presentation.scenes.playlistview.PlaylistViewController;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Collections;
 
 public class MP3Player {
 
-    private SimpleMinim minim;
+    public SimpleMinim minim;
     private static SimpleAudioPlayer audioPlayer;
     public ObservableList<Track> tracksObservable;
     public ArrayList<Track> tracks;
@@ -46,7 +47,7 @@ public class MP3Player {
         trackNumber = new SimpleIntegerProperty(0);
         remainingTime = new SimpleIntegerProperty();
         track = new SimpleObjectProperty<Track>();
-        volume = new SimpleFloatProperty(0);
+        volume = new SimpleFloatProperty();
         isLooping = new SimpleBooleanProperty();
         isShuffling = new SimpleBooleanProperty();
         isPlaying = new SimpleBooleanProperty();
@@ -279,11 +280,11 @@ public class MP3Player {
     public void resetTrackOrder() {
 
         // Bubble Sort
-        for(int pass = 1; pass <= tracks.size() - 1; pass++){
-            for(int compare = 1; compare <= tracks.size() - pass; compare++){
+        for (int pass = 1; pass <= tracks.size() - 1; pass++) {
+            for (int compare = 1; compare <= tracks.size() - pass; compare++) {
                 Track first = tracks.get(compare - 1);
                 Track second = tracks.get(compare);
-                if(first.getId() > second.getId()){
+                if (first.getId() > second.getId()) {
                     Collections.swap(tracks, compare - 1, compare);
                 }
             }

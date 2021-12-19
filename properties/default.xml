@@ -6,4 +6,6 @@
     <comment>window width</comment>
     <entry key="window_width">450.0</entry>
     <entry key="window_height">800.0</entry>
+    <entry key="volume">0.0</entry>
+    <entry key="playlist-path">./music</entry>
 </properties>

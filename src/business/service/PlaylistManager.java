@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import presentation.application.MainApp;
 import presentation.scenes.playlistview.PlaylistViewController;
 
 import java.io.*;
@@ -195,6 +196,7 @@ public class PlaylistManager {
     public static void listf2(String directoryName, List<File> files) {
 
         File directory = new File(directoryName);
+        MainApp.playlistPath = directoryName;
 
         // Get all files from a directory.
         File[] fList = directory.listFiles();

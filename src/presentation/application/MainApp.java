@@ -3,6 +3,7 @@ package presentation.application;
 import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -21,9 +22,9 @@ import java.util.Properties;
 
 public class MainApp extends Application {
 
-    private Properties defaultProp = null;
-    private Properties appProp = null;
-    private static PlaylistManager playlistManager = new PlaylistManager();
+    public Properties defaultProp = null;
+    public Properties appProp = null;
+    private PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
     private Map<String, Pane> scenes;
     private Stage primaryStage;
@@ -33,6 +34,7 @@ public class MainApp extends Application {
     private BorderPane rootBorderPane;
     private double windowWidth;
     private double windowHeight;
+    public static String playlistPath;
 
     // CONTROLLERS
     private TopViewController topViewController;
@@ -43,11 +45,7 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
 
-        try {
-            playlistManager.playlist = playlistManager.getPlaylistFromM3U("./music");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         // GUI
         new Thread(() -> launch(args)).start();
@@ -136,7 +134,41 @@ public class MainApp extends Application {
 
     @Override
     public void init() {
+        loadInitialProperties();
+
+        try {
+            playlistManager.playlist = playlistManager.getPlaylistFromM3U(playlistPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         this.player = new MP3Player(playlistManager.playlist);
+
+        loadNextProperties();
+    }
+
+    private void loadInitialProperties(){
+        try {
+            defaultProp = new Properties();
+            FileInputStream finDefault = new FileInputStream("./properties/default.xml");
+            defaultProp.loadFromXML(finDefault);
+
+            appProp = new Properties(defaultProp);
+            FileInputStream finIndividual = new FileInputStream("./properties/individual.xml");
+            appProp.loadFromXML(finIndividual);
+
+            playlistPath = appProp.getProperty("playlist-path");
+
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadNextProperties(){
         try {
             defaultProp = new Properties();
             FileInputStream finDefault = new FileInputStream("./properties/default.xml");
@@ -148,7 +180,7 @@ public class MainApp extends Application {
 
             windowWidth = Double.valueOf(appProp.getProperty("window_width"));
             windowHeight = Double.valueOf(appProp.getProperty("window_height"));
-
+            player.setVolume(Float.valueOf(appProp.getProperty("volume")));
         } catch (InvalidPropertiesFormatException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -162,6 +194,8 @@ public class MainApp extends Application {
     public void stop() {
         appProp.put("window_width", Double.toString(primaryStage.getWidth()));
         appProp.put("window_height", Double.toString(primaryStage.getHeight()));
+        appProp.put("volume", Float.toString(player.getVolume()));
+        appProp.put("playlist-path", playlistPath);
         try {
             FileOutputStream fos = new FileOutputStream("./properties/individual.xml");
             appProp.storeToXML(fos, "window width");
@@ -170,5 +204,6 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.exit(1);
     }
 }
