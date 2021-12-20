@@ -2,42 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="974768c1-3843-47d7-9897-23bec4a7f431" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/01 Bring Mich Nach Hause.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/02 Drei Worte.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Playlist.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Playlist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Track.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Track.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/TrackCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/TrackCell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlists/playlist.m3u" beforeDir="false" afterPath="$PROJECT_DIR$/playlists/playlist.m3u" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/properties/individual.xml" beforeDir="false" afterPath="$PROJECT_DIR$/properties/individual.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/presentation/application/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/application/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
