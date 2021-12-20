@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="974768c1-3843-47d7-9897-23bec4a7f431" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music/01 Bring Mich Nach Hause.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/music/02 Drei Worte.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Playlist.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Playlist.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Track.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/data/Track.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/MP3Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/business/service/PlaylistManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/application/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/controlview/ControlViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playerview/PlayerViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/PlaylistViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/TrackCell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/playlistview/TrackCell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/startview/StartViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/scenes/topview/TopViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/eibo_test1/presentation/uicomponents/ImageViewPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playlists/playlist.m3u" beforeDir="false" afterPath="$PROJECT_DIR$/playlists/playlist.m3u" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/properties/individual.xml" beforeDir="false" afterPath="$PROJECT_DIR$/properties/individual.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/application/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/application/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/presentation/scenes/playerview/PlayerViewController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="CSS File" />
+        <option value="Tag Library Descriptor" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="22KAwasRMaoFtTgp7DL2pIaNbTq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="XML" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/properties" />
+      <recent name="$PROJECT_DIR$/src/presentation/scenes/controlview" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="presentation.scenes.topview" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="presentation.application.MainApp" />
+      <module name="iTues" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="presentation.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="974768c1-3843-47d7-9897-23bec4a7f431" name="Changes" comment="" />
+      <created>1639576152115</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639576152115</updated>
+      <workItem from="1639576161613" duration="2824000" />
+      <workItem from="1639636687226" duration="4125000" />
+      <workItem from="1639758087167" duration="20673000" />
+      <workItem from="1639813416801" duration="567000" />
+      <workItem from="1639814748150" duration="216000" />
+      <workItem from="1639845505760" duration="14232000" />
+      <workItem from="1639902657999" duration="22604000" />
+      <workItem from="1639927697841" duration="16360000" />
+      <workItem from="1639944995924" duration="84000" />
+      <workItem from="1639946221591" duration="3125000" />
+      <workItem from="1639988619434" duration="378000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.util.ConcurrentModificationException" package="java.util" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -70,21 +70,7 @@ public class PlayerViewController {
         try{
             coverView.setImage(new Image(new ByteArrayInputStream(player.playlist.getTracks().get(0).getAlbumImage())));
         } catch (NullPointerException e){
-            BufferedImage bImage = null;
-            try {
-                bImage = ImageIO.read(new File("../../Dummy Cover.jpg"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            try {
-                ImageIO.write(bImage, "jpg", bos );
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            byte [] dummyImage = bos.toByteArray();
-            coverView.setImage(new Image(new ByteArrayInputStream(dummyImage)));
-
+            e.printStackTrace();
         }
     }
 

@@ -111,7 +111,7 @@ public class MainApp extends Application {
         loadInitialProperties();
 
         try {
-            playlistManager.playlist = playlistManager.getPlaylistFromM3U(playlistPath);
+            playlistManager.playlist = playlistManager. getPlaylistFromM3U(playlistPath);
         } catch (IOException e) {
             e.printStackTrace();
         }

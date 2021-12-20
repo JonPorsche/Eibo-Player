@@ -1,0 +1,135 @@
+.big-button {
+    -fx-background-position: 50%;
+    -fx-min-height: 44;
+    -fx-min-width: 44;
+    -fx-background-radius: 22;
+    -fx-border-radius: 22;
+    -fx-background-color: transparent;
+    -fx-border-size: 1px;
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-background-repeat: no-repeat no-repeat;
+}
+
+/* TOP CONTROLS */
+
+#playlist-add-btn {
+    -fx-background-image: url("../../assets/icons/png1x/playlist_add.png");
+}
+
+#playlist-btn {
+    -fx-background-image: url("../../assets/icons/png1x/playlist.png");
+}
+
+/* TITLES */
+
+#titles-box {
+    -fx-min-height: 81px;
+    -fx-max-height: 81px;
+}
+
+#title {
+    -fx-text-align: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+}
+
+#artist {
+    -fx-text-align: center;
+    -fx-font-size: 18;
+    -fx-opacity: 0.8;
+}
+
+/* TIME CONTROL */
+
+#time-control {
+    -fx-min-height: 42px;
+}
+
+.time-labels {
+    -fx-font-size: 14;
+    -fx-opacity: 0.8;
+}
+
+#current-time {
+    -fx-text-align: left;
+}
+
+#remaining-time {
+    -fx-text-align: right;
+}
+
+/* CONTROLS */
+
+#control-box {
+    -fx-alignment: center;
+    -fx-min-height: 50px;
+}
+
+#repeat-btn {
+    -fx-background-image: url("../../assets/icons/png1x/repeat.png");
+}
+
+#skip-back-btn {
+    -fx-background-image: url("../../assets/icons/png1x/skip_back.png");
+}
+
+#play-btn {
+    -fx-background-image: url("../../assets/icons/png1x/play.png");
+    -fx-background-position: 60%;
+}
+
+#pause-btn {
+    -fx-background-image: url("../../assets/icons/png1x/pause.png");
+}
+
+#skip-next-btn {
+    -fx-background-image: url("../../assets/icons/png1x/skip_next.png");
+}
+
+#shuffle-btn {
+    -fx-background-image: url("../../assets/icons/png1x/shuffle.png");
+}
+
+/* VOLUME CONTROLS */
+
+#volume-controls {
+    -fx-min-height: 50px;
+    -fx-padding-top: 8px;
+}
+
+.volume-btn-max {
+    -fx-background-image: url("../../assets/icons/png1x/volume_up.png");
+}
+
+.volume-btn-min {
+    -fx-background-image: url("../../assets/icons/png1x/volume_down.png");
+}
+
+.volume-btn-off {
+    -fx-background-image: url("../../assets/icons/png1x/volume_off.png");
+}
+
+.pretty-slider {
+    -fx-control-inner-background: #1354cb;
+    -fx-background-color: transparent;
+}
+
+.pretty-slider .thumb {
+    -fx-background-color: white;
+}
+
+.pretty-slider .track {
+    -fx-pref-height:8;
+    -fx-background-color: white;
+    -fx-opacity: 0.15;
+}
+
+.pretty-slider .thumb {
+    -fx-pref-height: 16;
+    -fx-pref-width: 16;
+}
+
+.time-slider{
+    -fx-pref-width: 400px;
+}
