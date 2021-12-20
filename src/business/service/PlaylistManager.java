@@ -7,13 +7,10 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-
+import presentation.application.MainApp;
+import presentation.scenes.playlistview.PlaylistViewController;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.lang.Object.*;
 import java.util.List;
 
 public class PlaylistManager {
@@ -26,11 +23,9 @@ public class PlaylistManager {
     public Playlist getPlaylistFromM3U(String sDir) throws IOException {
 
         File[] faFiles = new File(sDir).listFiles(); // load files of dir into array
-        File m3uFile = new File("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/playlists/playlist.m3u"); // create new M3U playlist file
+        File m3uFile = new File("./playlists/playlist.m3u"); // create new M3U playlist file
         FileOutputStream fOutStream = new FileOutputStream(m3uFile); // output stream to write to the file
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fOutStream)); // output stream to write to the file
-
-        // TODO write file header
 
         String path;
 
@@ -50,58 +45,8 @@ public class PlaylistManager {
         playlist = new Playlist(trackList);
         tracksObservable = FXCollections.observableArrayList(trackList);
 
-
         playlist.numberOfTracks();
         return playlist;
-    }
-
-    public static Playlist getPlaylistFromDirectory() {
-
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-        trackList.clear();
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-
-        File[] faFiles = new File(directoryPath).listFiles(); // load files of dir into array
-
-        String filePath;
-
-        for (File file : faFiles) {
-            if (file.getName().matches(".*[0-9]+.*\\.(mp3)$")) {
-                filePath = file.getAbsolutePath();
-                trackList.add(loadTrackInfo(filePath));
-            }
-/*            if (file.isDirectory()) {
-                getPlaylist(file.getAbsolutePath());
-            }*/
-        }
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-        playlist.setTracks(trackList);
-        tracksObservable = FXCollections.observableArrayList(trackList);
-
-        playlist.numberOfTracks();
-        return playlist;
-    }
-
-    public void listf(String directoryName, List<File> files) {
-        File directory = new File(directoryName);
-        //System.out.println("+++ PlaylistManager.listf: directory = " + directoryName);
-
-        // Get all files from a directory.
-        File[] fList = directory.listFiles();
-        //System.out.println("+++ PlaylistManager.listf: fList: = " + fList.toString());
-
-        if (fList != null) {
-            //System.out.println("+++ PlaylistManager.listf: fList != null");
-
-            for (File file : fList) {
-                if (file.isFile() && file.getName().matches(".*[0-9]+.*\\.(mp3)$")) {
-                    files.add(file);
-                } else if (file.isDirectory()) {
-                    listf(file.getAbsolutePath(), files);
-                }
-            }
-        }
-        System.out.println("+++ PlaylistManager.listf: The direcotry contains " + files.size() + " mp3 files");
     }
 
     private static Track loadTrackInfo(String songFilePath) {
@@ -128,12 +73,7 @@ public class PlaylistManager {
             System.err.println("File not found.");
             e.printStackTrace();
         }
-        return new Track(1, title, duration, albumTitle, artist, songFilePath, albumImage);
-    }
-
-    public void openFile() {
-        FileChooser fileChooser = new FileChooser();
-        Platform.runLater(() -> fileChooser.showOpenDialog(null));
+        return new Track(title, duration, albumTitle, artist, songFilePath, albumImage);
     }
 
     public static void selectDirectory() {
@@ -143,49 +83,26 @@ public class PlaylistManager {
             @Override
             public void run() {
                 File selectedDirectory = directoryChooser.showDialog(null);
-                directoryPath = selectedDirectory.getAbsolutePath();
-                System.out.println("+++ PlaylistManager.selectDirectory: directoryPath = " + selectedDirectory.getAbsolutePath());
-                trackList.clear();
-                List<File> files = new ArrayList<>();
-                listf2(directoryPath, files);
-                System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
-                playlist.setTracks(trackList);
-                playlist.numberOfTracks();
-                System.out.println("+++ PlaylistManager.selectDirectory: trackList = " + trackList.toString());
+                directoryChooser.setTitle("Open mp3 folder");
+                if(selectedDirectory != null) {
+
+                    directoryPath = selectedDirectory.getAbsolutePath();
+                    trackList.clear();
+                    List<File> files = new ArrayList<>();
+                    loadPlaylist(directoryPath, files);
+                    playlist.setTracks(trackList);
+                    playlist.numberOfTracks();
+                    PlaylistViewController.trackListModel.clear();
+                    PlaylistViewController.trackListModel.addAll(playlist.getTracks());
+                }
             }
         });
     }
 
-    public static Playlist getPlaylistFromDirectory2() {
-
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-        trackList.clear();
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-
-        File[] faFiles = new File(directoryPath).listFiles(); // load files of dir into array
-
-        String filePath;
-
-        for (File file : faFiles) {
-            if (file.getName().matches(".*[0-9]+.*\\.(mp3)$")) {
-                filePath = file.getAbsolutePath();
-                trackList.add(loadTrackInfo(filePath));
-            }
-/*            if (file.isDirectory()) {
-                getPlaylist(file.getAbsolutePath());
-            }*/
-        }
-        System.out.println("+++ PlaylistManager.getPlaylistFromDirectory: trackList = " + trackList.toString());
-        playlist.setTracks(trackList);
-        tracksObservable = FXCollections.observableArrayList(trackList);
-
-        playlist.numberOfTracks();
-        return playlist;
-    }
-
-    public static void listf2(String directoryName, List<File> files) {
+    public static void loadPlaylist(String directoryName, List<File> files) {
 
         File directory = new File(directoryName);
+        MainApp.playlistPath = directoryName;
 
         // Get all files from a directory.
         File[] fList = directory.listFiles();
@@ -198,11 +115,10 @@ public class PlaylistManager {
                     filePath = file.getAbsolutePath();
                     trackList.add(loadTrackInfo(filePath));
                 } else if (file.isDirectory()) {
-                    listf2(file.getAbsolutePath(), files);
+                    loadPlaylist(file.getAbsolutePath(), files);
                 }
             }
         }
-        System.out.println("+++ PlaylistManager.listf2: The direcotry contains " + files.size() + " mp3 files");
     }
 
     public static Playlist getPlaylist() {

@@ -16,41 +16,34 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import presentation.application.MainApp;
-import presentation.scenes.playerview.PlayerViewController;
-import javafx.scene.control.Button;
-
+import presentation.scenes.topview.TopViewController;
 import java.util.ArrayList;
 
 public class PlaylistViewController {
 
-    private Button playlistAddButton;
-    private Button closeButton;
-    private MainApp application;
     private MP3Player player;
     private Playlist playlist;
     private Pane rootView;
     private VBox trackListContainer;
+    public static ObservableList<Track> trackListModel = FXCollections.observableArrayList();
+
 
     private ListView<Track> trackListView;
 
     public PlaylistViewController(MainApp application, Playlist playlist, MP3Player player){
-        this.application = application;
         this.playlist = playlist;
         this.player = player;
 
-        PlaylistView mainView = new PlaylistView();
+        PlaylistView playlistView = new PlaylistView();
 
-        this.playlistAddButton = mainView.playlistAddButton;
-        this.closeButton = mainView.closeButton;
-        this.trackListContainer = mainView.trackListContainer;
-        this.trackListView = mainView.trackListView;
+        this.trackListContainer = playlistView.trackListContainer;
+        this.trackListView = playlistView.trackListView;
 
-        rootView = mainView;
+        rootView = playlistView;
         initialize();
     }
 
@@ -58,12 +51,6 @@ public class PlaylistViewController {
 
         trackListContainer.getStyleClass().add("container");
         VBox.setMargin(trackListView, new Insets(5,0,5,0));
-
-        closeButton.setOnAction(event -> application.switchScene("PlayerView"));
-
-        playlistAddButton.setOnAction(event -> {
-            PlaylistManager.selectDirectory();
-        });
 
         trackListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -73,12 +60,12 @@ public class PlaylistViewController {
                     player.getTrackNumber(selectedTrack);
 
                     if(!player.isPlaying() && player.isFirstTrack()){
-                        player.setPosition(0);
+                        player.setPlayheadPosition(0);
                         player.loadTrack();
                         player.play();
                     } else {
                         player.pause();
-                        player.setPosition(0);
+                        player.setPlayheadPosition(0);
                         player.loadTrack();
                         player.play();
                     }
@@ -94,59 +81,32 @@ public class PlaylistViewController {
             }
         });
 
-        // recognizing the selected track
-        trackListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Track>() {
-            @Override
-            public void changed(ObservableValue<? extends Track> observable, Track oldTrack, Track newTrack) {
-                System.out.println(newTrack);
-/*                player.getTrackNumber(newTrack);
-                player.loadTrack();*/
-            }
-        });
-
         ArrayList<Track> tracks = playlist.getTracks();
-        System.out.println("+++ PlaylistViewController.initialize: tracks = " + tracks.toString());
 
-        /* Set content to be displayed.
-        *  ObservableList is a collection that is capable of notifying UI controls
-        *  when objects are added, updated and removed.
-        * */
-
-        ObservableList<Track> trackListModel = FXCollections.observableArrayList();
         trackListModel = trackListView.getItems();
-        //trackListModel.clear();
         trackListModel.addAll(PlaylistManager.trackList);
-        System.out.println("+++ PlaylistViewController.initialize: trackListModel = " + trackListModel.toString());
-
-        trackListModel.addListener(new InvalidationListener() {
+        trackListModel.addListener(new ListChangeListener<Track>() {
             @Override
-            public void invalidated(Observable observable) {
-                System.out.println("+++ PlaylistViewController.initialize: List invalidated");
+            public void onChanged(Change<? extends Track> c) {
+                if(player.isPlaying()){
+                    player.pause();
+                }
+                player.setPlayheadPosition(0);
+                player.setTrackNumber(0);
+                player.loadTrack();
+                player.setNumberOfTracks(playlist.numberOfTracks());
             }
         });
 
-        PlaylistManager.tracksObservable.addListener(new ListChangeListener<Track>() {
+        player.trackNumberProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void onChanged(Change<? extends Track> c) {
-                System.out.println("+++ PlaylistViewController.initialize: List changed");
-
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                trackListView.getSelectionModel().select(player.getTrackNumber());
             }
         });
-
-/*        trackListModel.addListener(new ListChangeListener<Track>() {
-            @Override
-            public void onChanged(Change<? extends Track> c) {
-                System.out.println("PlaylistViewController.initialize: trackListModel change listener: Detected a change!");
-            }
-        });*/
-
     }
 
     public Pane getRootView() {
         return rootView;
-    }
-
-    public void setTrackListView(ListView<Track> trackListView) {
-        this.trackListView = trackListView;
     }
 }

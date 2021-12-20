@@ -4,92 +4,60 @@ import business.service.MP3Player;
 import business.service.PlaylistManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlaylistViewController;
-
-import java.io.File;
-import java.util.ArrayList;
+import presentation.scenes.startview.StartViewController;
+import presentation.scenes.controlview.ControlViewController;
+import presentation.scenes.topview.TopViewController;
+import java.io.*;
 import java.util.HashMap;
-import java.util.List;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
+import java.util.Properties;
 
 public class MainApp extends Application {
 
-    private static PlaylistManager playlistManager = new PlaylistManager();
+    public Properties defaultProp = null;
+    public Properties appProp = null;
+    private PlaylistManager playlistManager = new PlaylistManager();
     private MP3Player player;
-    //private static Playlist playlist;
     private Map<String, Pane> scenes;
     private Stage primaryStage;
-    private static List<File> files = new ArrayList<>();
+    private Pane topPane;
+    private Pane centerPane;
+    private Pane bottomPane;
+    private BorderPane rootBorderPane;
+    private double windowWidth;
+    private double windowHeight;
+    public static String playlistPath;
+
+    // CONTROLLERS
+    private TopViewController topViewController;
+    private PlayerViewController playerViewController;
+    private PlaylistViewController playlistViewController;
+    private ControlViewController controlViewController;
+    private StartViewController startViewController;
 
     public static void main(String[] args) {
-
-        // Load playlist
-/*        new Thread(() -> {
-            try {
-                PlaylistManager playlistManager = new PlaylistManager();
-                playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();*/
-
-        //playlistManager.openFile();
-        //playlistManager.selectDirectory();
-        //playlistManager.listf("/Users/jonporsche/Documents", files);
-
-        try {
-            //playlist = playlistManager.getPlaylist("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
-            playlistManager.playlist = playlistManager.getPlaylistFromM3U("/Users/jonporsche/Documents/Dev Projects.nosync/eibo_test1/music");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // GUI
         new Thread(() -> launch(args)).start();
-
-        //KeyboardController controller = new KeyboardController();
     }
 
-    /* Erzeugung des eigentlichen Views bzw. der Controller */
     @Override
     public void start(Stage primaryStage) {
-
-        this.player = new MP3Player(playlistManager.playlist);
-
         try {
-            scenes = new HashMap<String, Pane>();
+            startControllers();
+            loadScenes();
+            setInitialView();
+            setRootBorderPanes();
 
-            // Definition der Screens/Scenes
-            /*Pane view = new PlayerView();
-            scenes.put("PlayerView", view);*/
-
-            PlayerViewController playerViewController = new PlayerViewController(this, player);
-            scenes.put("PlayerView", playerViewController.getRootView());
-
-            PlaylistViewController playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
-            scenes.put("PlaylistView", playlistViewController.getRootView());
-
-            // Erzeuge Wurzel-Element, dem alle Elemente hinzugefügt werden
-            Pane root = scenes.get("PlayerView");
-
-            /*  erzeuge die Szene mit dem Wurzel-Element und setze die Szene
-            als aktuelle darzustellende Szene für die Bühne
-         */
-            Scene scene = new Scene(root, 360, 640);
+            Scene scene = new Scene(rootBorderPane, windowWidth, windowHeight);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             this.primaryStage = primaryStage;
             primaryStage.setScene(scene);
-            /*primaryStage.minWidthProperty().bind(scene.heightProperty().multiply(2));
-            primaryStage.minHeightProperty().bind(scene.widthProperty().divide(2));*/
-
-            /*  es muss explizit gesagt werden , dass das Fenster sichtbar
-            gemacht werden soll
-         */
             primaryStage.setTitle("iTues");
             primaryStage.show();
         } catch (Exception e) {
@@ -97,17 +65,119 @@ public class MainApp extends Application {
         }
     }
 
-    public void switchScene(String scene) {
-        if (scenes.containsKey(scene) ) {
-            primaryStage.getScene().setRoot(scenes.get(scene));
+    public void startControllers() {
+        topViewController = new TopViewController(this);
+        playerViewController = new PlayerViewController(this, player);
+        playlistViewController = new PlaylistViewController(this, playlistManager.playlist, player);
+        controlViewController = new ControlViewController(this, player);
+        startViewController = new StartViewController(this);
+    }
+
+    private void loadScenes() {
+        scenes = new HashMap<String, Pane>();
+        scenes.put("TopView", topViewController.getRootView());
+        scenes.put("PlayerView", playerViewController.getRootView());
+        scenes.put("PlaylistView", playlistViewController.getRootView());
+        scenes.put("ControlView", controlViewController.getRootView());
+        scenes.put("StartView", startViewController.getRootView());
+    }
+
+    private void setInitialView() {
+        topPane = scenes.get("TopView");
+        centerPane = scenes.get("PlayerView");
+        bottomPane = scenes.get("ControlView");
+    }
+
+    private void setRootBorderPanes() {
+        rootBorderPane = new BorderPane();
+        rootBorderPane.setTop(topPane);
+        rootBorderPane.setCenter(centerPane);
+        rootBorderPane.setBottom(bottomPane);
+    }
+
+    public void switchCenterPane(String scene) {
+        if (scenes.containsKey(scene)) {
+            setCenterPane(scenes.get(scene));
+            rootBorderPane.setCenter(centerPane);
         }
     }
 
-/*    @Override
-    public void init() {
+    public void setCenterPane(Pane centerPane) {
+        this.centerPane = centerPane;
+    }
 
-        *//* in der Anwednung gibt es einen Player, der dann von allen
-     * Seiten/Views bzw. deren Controllern aus erreichbar ist
-     *//*
-    }*/
+    @Override
+    public void init() {
+        loadInitialProperties();
+
+        try {
+            playlistManager.playlist = playlistManager. getPlaylistFromM3U(playlistPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.player = new MP3Player(playlistManager.playlist);
+
+        loadNextProperties();
+    }
+
+    private void loadInitialProperties(){
+        try {
+            defaultProp = new Properties();
+            FileInputStream finDefault = new FileInputStream("./properties/default.xml");
+            defaultProp.loadFromXML(finDefault);
+
+            appProp = new Properties(defaultProp);
+            FileInputStream finIndividual = new FileInputStream("./properties/individual.xml");
+            appProp.loadFromXML(finIndividual);
+
+            playlistPath = appProp.getProperty("playlist-path");
+
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadNextProperties(){
+        try {
+            defaultProp = new Properties();
+            FileInputStream finDefault = new FileInputStream("./properties/default.xml");
+            defaultProp.loadFromXML(finDefault);
+
+            appProp = new Properties(defaultProp);
+            FileInputStream finIndividual = new FileInputStream("./properties/individual.xml");
+            appProp.loadFromXML(finIndividual);
+
+            windowWidth = Double.valueOf(appProp.getProperty("window_width"));
+            windowHeight = Double.valueOf(appProp.getProperty("window_height"));
+            player.setVolume(Float.valueOf(appProp.getProperty("volume")));
+        } catch (InvalidPropertiesFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stop() {
+        appProp.put("window_width", Double.toString(primaryStage.getWidth()));
+        appProp.put("window_height", Double.toString(primaryStage.getHeight()));
+        appProp.put("volume", Float.toString(player.getVolume()));
+        appProp.put("playlist-path", playlistPath);
+        try {
+            FileOutputStream fos = new FileOutputStream("./properties/individual.xml");
+            appProp.storeToXML(fos, "Individual Properties");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(1);
+    }
 }
